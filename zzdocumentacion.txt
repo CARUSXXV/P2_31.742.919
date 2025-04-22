@@ -18,7 +18,7 @@ En resumindas cuentas, "AquaRepair" es una aplicación web con un estilo moderno
 
 2.2 Arquitectura
 
-- `/public`: Archivos estáticos (Sin embargo, aún no he necesitado usar esta carpeta, no obstante la tengo ya creada para implementaciones futuras).
+- `/public`: Archivos estáticos.
 - `/src`: Directorio principal del código fuente.
   - `/views`: Plantillas EJS para las vistas.
 - `server.ts`: Servidor Express principal, el cual también contiene información relevante de la empresa.
