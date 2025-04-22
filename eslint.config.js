@@ -1,7 +1,5 @@
 import js from '@eslint/js';
 import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -11,18 +9,9 @@ export default tseslint.config(
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-    },
+      globals: globals.node, // Cambiado a Node.js
+    }
+    // En esta parte, se pueden agregar reglas específicas para TypeScript o Node bajo el bloque rules, sin embargo, optaré por no incluir ninguna regla adicional para mantener la configuración más limpia.
+    // rules: { }
   }
 );

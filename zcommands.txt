@@ -1,0 +1,72 @@
+Git:
+
+Comandos básicos de Git:
+
+- git init: Crea un nuevo repositorio Git en el directorio actual.
+- git clone <url>: Clona un repositorio existente desde una URL.
+- git status: Muestra el estado de los archivos en el repositorio.
+- git add <archivo>: Agrega archivos al área de preparación (staging).
+- git commit -m "<mensaje>": Confirma los cambios con un mensaje descriptivo.
+- git push: Sube los commits locales al repositorio remoto.
+- git pull: Descarga y fusiona cambios desde un repositorio remoto.
+- git fetch: Descarga datos desde el repositorio remoto sin fusionarlos.
+
+Gestión de ramas:
+- git branch: Lista, crea o elimina ramas en el proyecto.
+- git checkout <rama>: Cambia de rama o restaura archivos.
+- git merge <rama>: Fusiona otra rama con la rama actual.
+
+Historial y diferencias:
+- git log: Muestra el historial de commits.
+- git diff: Muestra diferencias entre versiones de archivos.
+
+Deshacer cambios:
+- git reset: Deshace cambios en el área de preparación o historial de commits.
+- git rm <archivo>: Elimina archivos del repositorio y del sistema.
+
+Otros comandos útiles:
+- git stash: Guarda temporalmente cambios no confirmados.
+- git stash pop: Restaura los cambios guardados con `git stash`.
+- git tag <nombre>: Crea una etiqueta o marca en un commit específico.
+- git remote: Administra repositorios remotos.
+- git rebase <rama>: Reorganiza commits para modificar la historia del proyecto.
+- git show: Muestra detalles de un commit o etiqueta.
+- git config: Configura opciones de usuario y preferencias de Git.
+- git mv <archivo>: Mueve o renombra un archivo en el repositorio.
+
+
+Npm:
+
+Comandos básicos de npm:
+
+npm init      - Inicializa un nuevo proyecto npm y crea un archivo package.json interactivo.
+npm install   - Instala paquetes desde el registro de npm y actualiza el archivo package.json si se especifica.
+npm uninstall - Elimina un paquete instalado previamente y actualiza las dependencias del proyecto.
+npm update    - Actualiza los paquetes instalados a sus versiones más recientes compatibles.
+npm run       - Ejecuta un script definido en el archivo package.json (por ejemplo, "npm run start").
+npm start     - Ejecuta el script "start" definido en package.json, comúnmente utilizado para iniciar proyectos.
+npm test      - Ejecuta el script "test" definido en package.json, útil para pruebas de código.
+npm list      - Muestra una lista de paquetes instalados en el proyecto junto con sus dependencias.
+npm cache     - Gestiona la caché de npm, permite limpiarla o verificar su estado.
+
+Comandos relacionados con paquetes:
+
+npm install <paquete>        - Instala un paquete específico del registro de npm.
+npm install -g <paquete>     - Instala un paquete globalmente, accesible desde cualquier proyecto.
+npm install <paquete>@<versión> - Instala una versión específica de un paquete.
+npm audit                    - Escanea las dependencias en busca de vulnerabilidades de seguridad.
+npm audit fix                - Corrige automáticamente los problemas encontrados por npm audit.
+npm outdated                 - Muestra paquetes que tienen versiones más recientes disponibles.
+
+Comandos avanzados:
+
+npm publish      - Publica un paquete en el registro de npm (requiere configuración adecuada).
+npm rebuild      - Reconstruye módulos nativos para actualizar dependencias binarias.
+npm ci           - Instala dependencias de forma determinista desde package-lock.json.
+npm deprecate    - Marca un paquete o versión como obsoleta en el registro de npm.
+
+Comandos de configuración:
+
+npm config set <clave> <valor>   - Establece opciones de configuración de npm, como proxy o registro.
+npm config get <clave>           - Muestra el valor actual de una clave de configuración.
+npm config delete <clave>        - Elimina una clave de configuración específica.
