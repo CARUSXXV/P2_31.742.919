@@ -39,13 +39,11 @@ En resumindas cuentas, "AquaRepair" es una aplicación web con un estilo moderno
 
 3.3 Features Section
 - Tarjetas interactivas con efectos hover para hacerlo más moderno y atractivo.
-- Iconos animados.
 - Fondo con gradientes y efectos.
 - Layout responsive en grid.
 
 3.4 Services Section
 - Tarjetas de servicio con imágenes.
-- Detalles expandibles.
 - Iconos descriptivos.
 - Animaciones en scroll.
 
@@ -59,7 +57,6 @@ En resumindas cuentas, "AquaRepair" es una aplicación web con un estilo moderno
 - Slider con Swiper.js.
 - Tarjetas de testimonios.
 - Sistema de calificación.
-- Navegación intuitiva.
 
 3.7 Stats Section
 - Contador de estadísticas.
@@ -68,7 +65,6 @@ En resumindas cuentas, "AquaRepair" es una aplicación web con un estilo moderno
 - Efectos visuales.
 
 3.8 FAQ Section
-- Preguntas frecuentes expandibles.
 - Animaciones suaves.
 - Diseño intuitivo.
 - Organización clara.
@@ -81,25 +77,18 @@ En resumindas cuentas, "AquaRepair" es una aplicación web con un estilo moderno
 
 3.10 Footer
 - Información de contacto.
-- Enlaces sociales.
+- Enlaces sociales. (Ya que no hay un perfil como tal que responda a AquaRepair, al hacer click solo redirecciona a la pagina principal de la red social clickada, mas adelante puede implementarse un perfil real, al menos para dar la sensacion de mas realismo).
 - Certificaciones.
-- Diseño moderno.
 
 4. Características Técnicas
 
-4.1 Optimización
-- Lazy loading de imágenes.
-- Minificación de assets.
-- Compresión de respuestas.
-- Caché del navegador.
-
-4.2 Animaciones
+4.1 Animaciones
 - AOS para animaciones en scroll.
 - Transiciones CSS.
 - Efectos de hover.
 - Animaciones de carga.
 
-4.3 SEO
+4.2 SEO
 - Meta tags optimizados.
 - Estructura semántica.
 - URLs amigables.
@@ -117,19 +106,13 @@ En resumindas cuentas, "AquaRepair" es una aplicación web con un estilo moderno
     --bg-secondary: #f5f8ff;
 }
 
-6. Mantenimiento
-- Actualización regular de dependencias.
-- Monitoreo de rendimiento.
-- Backups automáticos.
-- Logs de errores.
-
-7. Mejores Prácticas
+6. Mejores Prácticas
 - Código limpio y dividido por secciones comentadas.
 - Nombres descriptivos.
 - Reutilización de componentes.
 - Principios SOLID.
 
-8. Scripts (Visión detallada).
+7. Scripts (Visión detallada).
 
 Scripts Externos:
 
