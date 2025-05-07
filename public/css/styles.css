@@ -809,7 +809,7 @@
     cursor: pointer;
   }
 
-  /* Responsive Design */
+  /* Diseño responsivo */
   @media (max-width: 768px) {
     .mobile-menu-btn {
       display: block;
@@ -821,8 +821,8 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-left: 0; /* Eliminar margen negativo en móviles */
-      justify-content: flex-start; /* Alinear al inicio en móviles */
+      margin-left: 0; 
+      justify-content: flex-start; 
     }
 
     .nav-links {
