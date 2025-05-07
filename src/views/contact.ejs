@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/contact-form.css">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="contact-form">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2>Contáctanos</h2>
+                <% if (locals.errors) { %>
+                    <div class="notification error">
+                        <% errors.forEach(function(error) { %>
+                            <%= error.msg %>
+                        <% }); %>
+                    </div>
+                <% } %>
+                <% if (locals.success) { %>
+                    <div class="notification success" id="success-notification">
+                        ¡Mensaje enviado correctamente!
+                    </div>
+                <% } %>
+                <form action="/contact/add" method="POST">
+                    <div>
+                        <label for="email"><i class="ri-mail-line"></i> Correo electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="name"><i class="ri-user-line"></i> Nombre completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="comment"><i class="ri-message-3-line"></i> Comentario</label>
+                        <textarea id="comment" name="comment" required></textarea>
+                    </div>
+                    <button type="submit"><i class="ri-send-plane-line"></i> Enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Notificación de éxito visual
+        document.addEventListener('DOMContentLoaded', function() {
+            const successNotification = document.getElementById('success-notification');
+            if (successNotification) {
+                setTimeout(() => {
+                    successNotification.style.opacity = '0';
+                    setTimeout(() => {
+                        successNotification.style.display = 'none';
+                    }, 500);
+                }, 3500); // Ocultar después de 3.5 segundos
+            }
+        });
+    </script>
+    <%- include('partials/footer') %>
+    <%- include('partials/scripts') %>
+</body>
+</html>

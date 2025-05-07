@@ -147,6 +147,7 @@
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    margin-right: 20px;
   }
 
   .cta-button::before {
@@ -855,6 +856,11 @@
     .nav-links a:hover {
       background: var(--primary-color);
       color: white;
+    }
+
+    .cta-button {
+      margin-top: 20px;
+      margin-left: 30px;
     }
 
     .mobile-menu-btn {

@@ -1,0 +1,31 @@
+<nav class="navbar">
+    <div class="container navbar-container">
+        <a href="/" class="logo">
+            <i class="ri-drop-line"></i>
+            <%= typeof name !== 'undefined' ? name : 'AquaRepair' %>
+        </a>
+        <button class="mobile-menu-btn">
+            <i class="ri-menu-line"></i>
+        </button>
+        <div class="nav-links">
+            <a href="/">Inicio</a>
+            <a href="/#servicios">Servicios</a>
+            <a href="/#proyectos">Proyectos</a>
+            <a href="/#testimonios">Testimonios</a>
+            <a href="/contact">Contacto</a>
+            <a href="/payment">Pagos</a>
+        </div>
+        <a href="/contact" class="cta-button">
+            <i class="ri-phone-line"></i>
+            Emergencias 24/7
+        </a>
+        <style>
+            @media (max-width: 768px) {
+            .cta-button {
+            display: none;
+          }
+        }
+        </style>
+       
+    </div>
+</nav>

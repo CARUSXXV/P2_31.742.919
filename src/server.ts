@@ -2,25 +2,43 @@ import express from 'express';
 import path from 'path';
 import livereload from 'livereload';
 import connectLivereload from 'connect-livereload';
+import bodyParser from 'body-parser';
+import { ContactController } from './controllers/ContactController';
+import { PaymentController } from './controllers/PaymentController';
 
-// Configurar servidor de livereload
+const ADMIN_SECRET = "a1b2c3d4e5f6g7h8i9j0kLmNoPqRsTuVwXyZ1234567890"; // Clave de acceso para el administrador (para proteger rutas de pago y contactos)
+
+// Middleware para verificar la clave de administrador
+function isAuthorized(req: express.Request, res: express.Response, next: express.NextFunction) {
+  const token = req.query.token || req.headers['x-admin-token']; // Busca el token en la URL o en los headers
+  if (token === ADMIN_SECRET) {
+   return next(); // Si la clave es correcta, continuar con la siguiente función
+  } else {
+    res.status(403).send('Acceso denegado'); // Si no, enviar error 403 (denegar acceso)
+  }
+}
+
+// Configurar servidor de livereload 
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, 'views'));
 liveReloadServer.watch(path.join(__dirname, 'public'));
 
-// Configurar Express
+// Configurar Express 
 const app = express();
 const port = 3000;
 
-// Agregar middleware de livereload
+// Agregar middleware de livereload 
 app.use(connectLivereload());
 
-// Configurar EJS
+app.use(bodyParser.urlencoded({ extended: true })); // Middleware para parsear bodies url-encoded (formularios).
+app.use(bodyParser.json()); // Middleware para parsear bodies JSON.
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
-// Servir archivos estáticos
 app.use(express.static(path.join(__dirname, '../public')));
+
+const contactController = new ContactController();
+const paymentController = new PaymentController();
 
 // Información relevante de la empresa
 const companyInfo = {
@@ -178,13 +196,43 @@ const companyInfo = {
   ]
 };
 
-
 // Rutas
-app.get('/', (req, res) => {
+app.get('/', (req: express.Request, res: express.Response) => {
   res.render('index', companyInfo);
 });
 
+app.get('/contact', (req: express.Request, res: express.Response) => {
+  res.render('contact', companyInfo);
+});
+
+app.post('/contact/add', contactController.validations, (req: express.Request, res: express.Response) => {
+  contactController.add(req, res);
+});
+
+// Ruta para verificar contactos protegida con token
+app.get('/admin/contacts', isAuthorized, (req: express.Request, res: express.Response) => {
+  contactController.index(req, res);
+});
+
+app.get('/payment', (req: express.Request, res: express.Response) => {
+  res.render('payment', companyInfo);
+});
+
+app.post('/payment/add', paymentController.validations, (req: express.Request, res: express.Response) => {
+  paymentController.add(req, res);
+});
+
+app.get('/payment/success', (req: express.Request, res: express.Response) => {
+  res.render('payment-success', companyInfo);
+});
+
+// Ruta para verificar pagos protegida con token
+app.get('/api/payments', isAuthorized, (req: express.Request, res: express.Response) => {
+    paymentController.getAll(req, res);
+});
+
+
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Servidor corriendo en http://localhost:${port}`);
 });
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/payment-form.css">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    
+    <div class="form-container">
+        <div class="form-card">
+            <h2 class="form-title">Realizar pago</h2>
+            <% if (locals.success) { %>
+                <div class="notification success">
+                    ¡Pago procesado correctamente!
+                </div>
+            <% } %>
+            <% if (locals.errors) { %>
+                <div class="notification error">
+                    <% errors.forEach(function(error) { %>
+                        <%= error.msg %>
+                    <% }); %>
+                </div>
+            <% } %>
+            <form action="/payment/add" method="POST" id="payment-form" class="modern-form">
+                <div class="form-group">
+                    <label class="form-label">Servicio</label>
+                    <select name="service_id" required class="form-select" id="service-select">
+                        <option value="1" data-amount="150">Emergencias 24/7 - $150</option>
+                        <option value="2" data-amount="100">Reparaciones Precisas - $100</option>
+                        <option value="3" data-amount="200">Instalaciones Modernas - $200</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Correo electrónico</label>
+                    <div class="input-icon-wrapper">
+                        <i class="ri-mail-line"></i>
+                        <input type="email" name="email" required class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre del titular</label>
+                    <div class="input-icon-wrapper">
+                        <i class="ri-user-line"></i>
+                        <input type="text" name="cardholder_name" required class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Número de tarjeta</label>
+                    <div class="input-icon-wrapper">
+                        <i class="ri-bank-card-line"></i>
+                        <input type="text" name="card_number" required pattern="[0-9]{16}" class="form-input" placeholder="1234567890123456">
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Mes</label>
+                        <input type="number" name="expiry_month" required min="1" max="12" class="form-input" placeholder="MM">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Año</label>
+                        <input type="number" name="expiry_year" required min="2024" class="form-input" placeholder="YYYY">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">CVV</label>
+                        <div class="input-icon-wrapper">
+                            <i class="ri-lock-line"></i>
+                            <input type="text" name="cvv" required pattern="[0-9]{3,4}" class="form-input" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Moneda</label>
+                    <select name="currency" required class="form-select">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
+                <input type="hidden" name="amount" id="amount-input" value="150">
+                <button type="submit" class="form-button payment-button">
+                    <i class="ri-secure-payment-line"></i>
+                    Realizar pago
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const serviceSelect = document.getElementById('service-select');
+        const amountInput = document.getElementById('amount-input');
+        
+        // Set initial amount
+        const initialAmount = serviceSelect.options[serviceSelect.selectedIndex].getAttribute('data-amount');
+        amountInput.value = initialAmount;
+
+        // Update amount when service changes
+        serviceSelect.addEventListener('change', function(e) {
+            const amount = e.target.options[e.target.selectedIndex].getAttribute('data-amount');
+            amountInput.value = amount;
+        });
+
+        // Auto-hide notifications
+        const notifications = document.querySelectorAll('.notification');
+        notifications.forEach(notification => {
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 500);
+            }, 3500);
+        });
+    });
+    </script>
+
+    <%- include('partials/footer') %>
+    <%- include('partials/scripts') %>
+</body>
+</html>
