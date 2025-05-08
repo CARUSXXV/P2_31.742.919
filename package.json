@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon --watch src --watch src/views --ext ts,ejs,css --exec ts-node-dev --respawn src/server.ts",
-    "build": "tsc && copyfiles -u 1 src/views/**/*.ejs dist/views",
+    "build": "tsc && npx copyfiles -u 1 src/views/**/*.ejs dist/views",
     "start": "node dist/server.js"
   },
   "dependencies": {
