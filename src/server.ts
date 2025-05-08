@@ -36,6 +36,7 @@ app.use(bodyParser.json()); // Middleware para parsear bodies JSON.
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../public')));
+console.log('Ruta de vistas configurada:', path.join(__dirname, 'views'));
 
 const contactController = new ContactController();
 const paymentController = new PaymentController();
