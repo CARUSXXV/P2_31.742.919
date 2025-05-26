@@ -1,34 +1,35 @@
 import { DatabaseConnection } from './Database';
 
-// Interfaz que define la estructura de un contacto
 export interface Contact {
-  id?: number; // ID del contacto
-  email: string; // Correo electrónico
-  name: string; // Nombre del contacto
-  comment: string; // Comentario 
-  ip_address: string; // Dirección IP del contacto
-  created_at?: string; // Fecha de creación 
+  id?: number; 
+  email: string; 
+  name: string; 
+  comment: string; 
+  ip_address: string; 
+  country?: string; 
+  created_at?: string; 
 }
 
-// Clase para manejar operaciones relacionadas con los contactos
+// Clase ContactModel para manejar las operaciones de base de datos relacionadas con los contactos
 export class ContactModel {
-  // Obtención de la instancia de la base de datos
+  // Obtiene la instancia única de la conexión a la base de datos
   private db = DatabaseConnection.getInstance().getDatabase();
 
   // Método para agregar un nuevo contacto a la base de datos
   public async add(contact: Contact): Promise<number> {
     return new Promise((resolve, reject) => {
-      const { email, name, comment, ip_address } = contact;
-      // Inserción de los datos del contacto en la tabla 'contacts'
+      // Desestructuración de los campos del contacto
+      const { email, name, comment, ip_address, country } = contact;
+      // Inserta un nuevo contacto en la tabla 'contacts'
       this.db.run(
-        'INSERT INTO contacts (email, name, comment, ip_address) VALUES (?, ?, ?, ?)',
-        [email, name, comment, ip_address],
+        'INSERT INTO contacts (email, name, comment, ip_address, country) VALUES (?, ?, ?, ?, ?)',
+        [email, name, comment, ip_address, country],
         function(err) {
           if (err) {
-            // Rechazo de la promesa en caso de error
+            // Rechaza la promesa si hay un error
             reject(err);
           } else {
-            // Resolución de la promesa con el ID del último contacto insertado
+            // Resuelve la promesa con el ID del último contacto insertado
             resolve(this.lastID);
           }
         }
@@ -39,17 +40,29 @@ export class ContactModel {
   // Método para obtener todos los contactos de la base de datos
   public async getAll(): Promise<Contact[]> {
     return new Promise((resolve, reject) => {
-      // Selección de todos los contactos ordenados por fecha de creación
+      // Selecciona todos los contactos ordenados por fecha de creación descendente
       this.db.all('SELECT * FROM contacts ORDER BY created_at DESC', (err, rows) => {
         if (err) {
-          // Rechazo de la promesa en caso de error
+          // Rechaza la promesa si hay un error
           reject(err);
         } else {
-          // Resolución de la promesa con los contactos obtenidos
+          // Resuelve la promesa con la lista de contactos
           resolve(rows as Contact[]);
         }
       });
     });
   }
-}
 
+  // Método para obtener un contacto por ID
+  public async getById(id: number): Promise<Contact | null> {
+    return new Promise((resolve, reject) => {
+      this.db.get('SELECT * FROM contacts WHERE id = ?', [id], (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row as Contact || null);
+        }
+      });
+    });
+  }
+}

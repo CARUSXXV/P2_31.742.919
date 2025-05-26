@@ -3,6 +3,7 @@
 <head>
     <%- include('partials/head') %>
     <link rel="stylesheet" href="/css/contact-form.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <%- include('partials/navbar') %>
@@ -35,6 +36,9 @@
                     <div>
                         <label for="comment"><i class="ri-message-3-line"></i> Comentario</label>
                         <textarea id="comment" name="comment" required></textarea>
+                    </div>
+                    <div class="recaptcha-container">
+                        <div class="g-recaptcha" data-sitekey="<%= process.env.RECAPTCHA_SITE_KEY %>"></div>
                     </div>
                     <button type="submit"><i class="ri-send-plane-line"></i> Enviar mensaje</button>
                 </form>

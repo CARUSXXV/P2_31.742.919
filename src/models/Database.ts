@@ -1,17 +1,19 @@
 import sqlite3 from 'sqlite3';
-import { Database } from 'sqlite3';
+import { Database } from 'sqlite3'; 
+import dotenv from 'dotenv'; // Importo dotenv para manejar variables de entorno
 
-// Clase para manejar la conexión a la base de datos
+dotenv.config(); // Carga las variables de entorno desde un archivo .env
+
 export class DatabaseConnection {
-  // Instancia única de la clase (patrón Singleton)
-  private static instance: DatabaseConnection;
-  // Objeto de la base de datos
-  private db: Database;
+  private static instance: DatabaseConnection; 
+  private db: Database; // Objeto de la base de datos
 
   // Constructor privado para evitar instanciación directa
   private constructor() {
+    // Obtiene la ruta de la base de datos desde las variables de entorno o usa 'database.sqlite' por defecto
+    const dbPath = process.env.DB_PATH || 'database.sqlite';
     // Conexión a la base de datos SQLite
-    this.db = new sqlite3.Database('database.sqlite', (err) => {
+    this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
         // Manejo de error en la conexión
         console.error('Error connecting to database:', err);
@@ -39,10 +41,11 @@ export class DatabaseConnection {
     this.db.run(`
       CREATE TABLE IF NOT EXISTS contacts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT NOT NULL,
+        email TEXT NOT NULL, 
         name TEXT NOT NULL,
         comment TEXT NOT NULL,
         ip_address TEXT NOT NULL,
+        country TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `);
@@ -60,6 +63,7 @@ export class DatabaseConnection {
         amount DECIMAL(10,2) NOT NULL,
         currency TEXT NOT NULL,
         service_id INTEGER NOT NULL,
+        country TEXT, 
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `);

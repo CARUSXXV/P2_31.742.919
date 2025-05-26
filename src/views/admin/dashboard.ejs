@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+    <div class="container">
+        <div class="admin-header">
+            <h2>Panel de Administración</h2>
+        </div>
+        <div class="admin-links">
+            <a href="/admin/contacts" class="btn btn-blue">Ver Contactos</a>
+            <a href="/admin/payments" class="btn btn-green">Ver Pagos</a>
+            <a href="/api/payments" class="btn btn-purple">Ver API Pagos (JSON)</a>
+            <a href="/admin/change-password" class="btn btn-orange">Cambiar Contraseña</a>
+        </div>
+        <div class="admin-summary">
+            <div class="summary-card">
+                <h3>Total de Contactos</h3>
+                <p class="summary-value blue"><%= stats.totalContacts %></p>
+            </div>
+            <div class="summary-card">
+                <h3>Pagos Exitosos</h3>
+                <p class="summary-value green"><%= stats.successfulPayments %></p>
+            </div>
+            <div class="summary-card">
+                <h3>Pagos Rechazados</h3>
+                <p class="summary-value red"><%= stats.rejectedPayments %></p>
+            </div>
+            <div class="summary-card">
+                <h3>Ingresos Totales</h3>
+                <p class="summary-value purple">$<%= stats.totalRevenue %></p>
+            </div>
+            <div class="summary-card">
+                <h3>Tasa de Éxito</h3>
+                <p class="summary-value indigo"><%= stats.successRate %>%</p>
+            </div>
+        </div>
+        <div class="admin-charts">
+            <div class="chart-card">
+                <h3>Estado de Pagos</h3>
+                <canvas id="paymentStatusChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Distribución por Moneda</h3>
+                <canvas id="currencyDistributionChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Contactos por País</h3>
+                <canvas id="contactsByCountryChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Servicios más Solicitados</h3>
+                <canvas id="popularServicesChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const paymentStatusData = JSON.parse('<%- JSON.stringify(charts && charts.paymentStatus ? charts.paymentStatus : {}) %>');
+        const currencyData = JSON.parse('<%- JSON.stringify(charts && charts.currencyDistribution ? charts.currencyDistribution : {}) %>');
+        const countryData = JSON.parse('<%- JSON.stringify(charts && charts.contactsByCountry ? charts.contactsByCountry : {}) %>');
+        const servicesData = JSON.parse('<%- JSON.stringify(charts && charts.popularServices ? charts.popularServices : {}) %>');
+        // Estado de Pagos
+        new Chart(document.getElementById('paymentStatusChart'), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(paymentStatusData),
+                datasets: [{
+                    data: Object.values(paymentStatusData),
+                    backgroundColor: ['#10B981', '#EF4444', '#F59E0B']
+                }]
+            }
+        });
+        // Distribución por Moneda
+        new Chart(document.getElementById('currencyDistributionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(currencyData),
+                datasets: [{
+                    data: Object.values(currencyData),
+                    backgroundColor: ['#3B82F6', '#EC4899']
+                }]
+            }
+        });
+        // Contactos por País
+        new Chart(document.getElementById('contactsByCountryChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(countryData),
+                datasets: [{
+                    label: 'Contactos',
+                    data: Object.values(countryData),
+                    backgroundColor: '#6366F1'
+                }]
+            }
+        });
+        // Servicios Populares
+        new Chart(document.getElementById('popularServicesChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(servicesData),
+                datasets: [{
+                    label: 'Solicitudes',
+                    data: Object.values(servicesData),
+                    backgroundColor: '#8B5CF6'
+                }]
+            }
+        });
+    </script>
+    <%- include('../partials/footer') %>
+    <%- include('../partials/scripts') %>
+</body>
+</html>

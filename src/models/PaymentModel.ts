@@ -12,6 +12,8 @@ export interface Payment {
   amount: number; // Monto del pago
   currency: string; // Moneda del pago
   service_id: number; // ID del servicio asociado al pago
+  transaction_id?: string; // ID de la transacción de la API
+  status?: string; // Estado de la transacción (aprobado, rechazado, error, etc)
   created_at?: string; // Fecha de creación del pago
 }
 
@@ -23,13 +25,13 @@ export class PaymentModel {
   // Método para agregar un nuevo pago a la base de datos
   public async add(payment: Payment): Promise<number> {
     return new Promise((resolve, reject) => {
-      const { email, cardholder_name, card_number, expiry_month, expiry_year, cvv, amount, currency, service_id } = payment;
+      const { email, cardholder_name, card_number, expiry_month, expiry_year, cvv, amount, currency, service_id, transaction_id, status } = payment;
       // Registro de información sobre el pago que se va a insertar
-      console.log('Inserting payment with data:', { email, cardholder_name, amount, currency, service_id });
+      console.log('Inserting payment with data:', { email, cardholder_name, amount, currency, service_id, transaction_id, status });
 
       this.db.run(
-        'INSERT INTO payments (email, cardholder_name, card_number, expiry_month, expiry_year, cvv, amount, currency, service_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [email, cardholder_name, card_number, expiry_month, expiry_year, cvv, amount, currency, service_id],
+        'INSERT INTO payments (email, cardholder_name, card_number, expiry_month, expiry_year, cvv, amount, currency, service_id, transaction_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [email, cardholder_name, card_number, expiry_month, expiry_year, cvv, amount, currency, service_id, transaction_id, status],
         function(err) {
           if (err) {
             console.error('Database error:', err);

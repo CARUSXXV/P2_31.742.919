@@ -18,6 +18,7 @@
                         <th>Email</th>
                         <th>Comentario</th>
                         <th>IP</th>
+                        <th>País</th>
                         <th>Fecha</th>
                     </tr>
                 </thead>
@@ -29,6 +30,7 @@
                             <td><%= contact.email %></td>
                             <td><%= contact.comment %></td>
                             <td><%= contact.ip_address %></td>
+                            <td><%= contact.country %></td>
                             <td><%= contact.created_at %></td>
                         </tr>
                     <% }); %>

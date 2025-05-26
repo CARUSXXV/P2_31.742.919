@@ -3,20 +3,11 @@ import path from 'path';
 import livereload from 'livereload';
 import connectLivereload from 'connect-livereload';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import { ContactController } from './controllers/ContactController';
 import { PaymentController } from './controllers/PaymentController';
-
-const ADMIN_SECRET = "a1b2c3d4e5f6g7h8i9j0kLmNoPqRsTuVwXyZ1234567890"; // Clave de acceso para el administrador (para proteger rutas de pago y contactos)
-
-// Middleware para verificar la clave de administrador
-function isAuthorized(req: express.Request, res: express.Response, next: express.NextFunction) {
-  const token = req.query.token || req.headers['x-admin-token']; // Busca el token en la URL o en los headers
-  if (token === ADMIN_SECRET) {
-   return next(); // Si la clave es correcta, continuar con la siguiente función
-  } else {
-    res.status(403).send('Acceso denegado'); // Si no, enviar error 403 (denegar acceso)
-  }
-}
+import { requireAuth } from './middleware/auth';
+import { AdminController } from './controllers/AdminController';
 
 // Configurar servidor de livereload 
 const liveReloadServer = livereload.createServer();
@@ -30,8 +21,17 @@ const port = 3000;
 // Agregar middleware de livereload 
 app.use(connectLivereload());
 
+app.set('trust proxy', 1); // Si se usa proxy/reverse proxy
+
+app.use(cookieParser()); // Middleware para leer cookies (necesario para autenticación admin)
 app.use(bodyParser.urlencoded({ extended: true })); // Middleware para parsear bodies url-encoded (formularios).
 app.use(bodyParser.json()); // Middleware para parsear bodies JSON.
+
+// Middleware para establecer variables globales (ejemplo: companyInfo)
+app.use((req, res, next) => {
+  res.locals.companyInfo = companyInfo;
+  next();
+});
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +40,7 @@ console.log('Ruta de vistas configurada:', path.join(__dirname, 'views'));
 
 const contactController = new ContactController();
 const paymentController = new PaymentController();
+const adminController = new AdminController();
 
 // Información relevante de la empresa
 const companyInfo = {
@@ -210,8 +211,8 @@ app.post('/contact/add', contactController.validations, (req: express.Request, r
   contactController.add(req, res);
 });
 
-// Ruta para verificar contactos protegida con token
-app.get('/admin/contacts', isAuthorized, (req: express.Request, res: express.Response) => {
+// Ruta para verificar contactos
+app.get('/admin/contacts', requireAuth, (req: express.Request, res: express.Response) => {
   contactController.index(req, res);
 });
 
@@ -227,11 +228,37 @@ app.get('/payment/success', (req: express.Request, res: express.Response) => {
   res.render('payment-success', companyInfo);
 });
 
-// Ruta para verificar pagos protegida con token
-app.get('/api/payments', isAuthorized, (req: express.Request, res: express.Response) => {
-    paymentController.getAll(req, res);
+app.get('/api/payments', requireAuth, (req: express.Request, res: express.Response) => {
+  paymentController.getAll(req, res);
 });
 
+// Rutas de login y dashboard admin
+app.get('/admin/login', (req, res) => {
+  res.render('admin/login');
+});
+app.post('/admin/login', (req, res) => adminController.login(req, res));
+app.get('/admin/logout', (req, res) => adminController.logout(req, res));
+
+// Dashboard protegido con requireAuth
+app.get('/admin/dashboard', requireAuth, (req, res) => {
+  adminController.dashboard(req, res);
+});
+
+// Paneles admin protegidos
+app.get('/admin/contacts', requireAuth, (req, res) => {
+  contactController.index(req, res);
+});
+app.get('/admin/payments', requireAuth, async (req, res) => {
+  const payments = await paymentController.getAllPaymentsArray();
+  res.render('admin/payments', { payments });
+});
+
+// Cambiar contraseña (GET)
+app.get('/admin/change-password', requireAuth, (req, res) => {
+  res.render('admin/change-password');
+});
+// Cambiar contraseña (POST)
+app.post('/admin/change-password', requireAuth, (req, res) => adminController.changePassword(req, res));
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);

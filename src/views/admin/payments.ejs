@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos Registrados</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Pagos registrados</h2>
+        <div class="table-container">
+            <table class="table">
+                <thead class="table-header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Nombre Titular</th>
+                        <th>Monto</th>
+                        <th>Moneda</th>
+                        <th>Servicio</th>
+                        <th>Transacción</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    <% payments.forEach(function(payment) { %>
+                        <tr>
+                            <td><%= payment.id %></td>
+                            <td><%= payment.email %></td>
+                            <td><%= payment.cardholder_name %></td>
+                            <td><%= payment.amount %></td>
+                            <td><%= payment.currency %></td>
+                            <td><%= payment.service_id %></td>
+                            <td><%= payment.transaction_id || '-' %></td>
+                            <td><%= payment.status || '-' %></td>
+                            <td><%= payment.created_at %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

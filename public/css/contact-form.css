@@ -114,6 +114,12 @@
     transform: scale(0.98);
 }
 
+.recaptcha-container {
+    display: flex; /* Utiliza flexbox para centrar */
+    justify-content: center; 
+    margin: 20px 0; /* Añade márgenes si es necesario */
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .contact-form .form-wrapper {
