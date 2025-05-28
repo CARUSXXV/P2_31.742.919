@@ -204,7 +204,10 @@ app.get('/', (req: express.Request, res: express.Response) => {
 });
 
 app.get('/contact', (req: express.Request, res: express.Response) => {
-  res.render('contact', companyInfo);
+  res.render('contact', {
+    ...companyInfo,
+    recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
+  });
 });
 
 app.post('/contact/add', contactController.validations, (req: express.Request, res: express.Response) => {
