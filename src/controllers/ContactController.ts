@@ -23,7 +23,10 @@ export class ContactController {
       // Verificar si hay errores de validación
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        res.render('contact', { errors: errors.array() });
+        res.render('contact', { 
+          errors: errors.array(),
+          recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
+        });
         return;
       }
 
@@ -31,7 +34,8 @@ export class ContactController {
       const isRecaptchaValid = await ReCaptcha.verify(req.body['g-recaptcha-response']);
       if (!isRecaptchaValid) {
         res.render('contact', { 
-          errors: [{ msg: 'reCAPTCHA inválido' }]
+          errors: [{ msg: 'reCAPTCHA inválido' }],
+          recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
         });
         return;
       }
@@ -57,7 +61,7 @@ export class ContactController {
         await EmailService.sendContactNotification(savedContact);
       }
       // Renderizar la vista de contacto con éxito
-      res.render('contact', { success: true });
+      res.render('contact', { success: true, recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY });
     } catch (error) {
       // Manejo de errores mejorado
       console.error('Error al guardar el contacto:', {
@@ -70,7 +74,8 @@ export class ContactController {
         ? (error instanceof Error ? error.message : 'Error desconocido')
         : 'No se pudo guardar el contacto. Intente nuevamente o contacte soporte.';
       res.render('contact', { 
-        errors: [{ msg: userErrorMsg }]
+        errors: [{ msg: userErrorMsg }],
+        recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
       });
     }
   }

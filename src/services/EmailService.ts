@@ -24,8 +24,6 @@ export class EmailService {
     // Desestructura las propiedades del objeto contact
 
     // Filtra destinatarios para evitar undefined
-    // Cabe destacar que Yopmail es un servicio de correos temporales y puede que no reciba correos enviados desde servidores SMTP autenticados (como Gmail).
-    // El sistema realiza el envío correctamente a ambos, pero en cuanto a la recepción en Yopmail, depende de las políticas de ese servicio y no del código directamente, de igual forma, el correo será enviado a los 2 correos.
     const recipients = [process.env.SMTP_USER, 'programacion2ais@yopmail.com'].filter(Boolean) as string[];
     const mailOptions = {
       // Define las opciones del correo electrónico
