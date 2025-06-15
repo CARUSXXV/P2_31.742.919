@@ -9,8 +9,11 @@
 <body>
     <div class="container">
         <h2 class="title">Contactos registrados</h2>
+        <div class="search-container">
+        <input type="text" id="searchContact" placeholder="Buscar por nombre o email">
+        </div>
         <div class="table-container">
-            <table class="table">
+            <table class="table" id="contactsTable">
                 <thead class="table-header">
                     <tr>
                         <th>ID</th>
@@ -38,5 +41,20 @@
             </table>
         </div>
     </div>
+    <script>
+        document.getElementById('searchContact').addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#contactsTable tbody tr');
+            rows.forEach(row => {
+                const name = row.children[1].textContent.toLowerCase();
+                const email = row.children[2].textContent.toLowerCase();
+                if (name.includes(value) || email.includes(value)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -5,18 +5,20 @@ C.I: 31.742.919
 
 ## 1. Descripción General
 
-En resumidas cuentas, "AquaRepair" es una aplicación web con un estilo moderno para un servicio de plomería profesional, diseñada para ofrecer una experiencia de usuario acogedora y una presentación visual atractiva, además de tener una llamada a la acción pronunciada, ya que se trata de un servicio de plomería/fontanería urgente.
+"AquaRepair" es una aplicación web moderna para un servicio de plomería profesional, con experiencia de usuario optimizada, panel administrativo seguro y gestión eficiente de contactos y pagos.
 
-## 2. Estructuración del Proyecto
+---
 
-### 2.1 Tecnologías Principales Utilizadas
-- Node.js con Express
-- EJS como motor de plantillas
-- TypeScript para tipado estático
-- CSS moderno con variables personalizadas
-- Bibliotecas: AOS (Animate On Scroll), Swiper (Deslizador)
+## 2. Estructura y Tecnologías
 
-### 2.2 Arquitectura
+- **Backend:** Node.js + Express + TypeScript
+- **Frontend:** EJS, CSS moderno, AOS, Swiper
+- **Base de datos:** SQLite
+- **Autenticación:** Local (email/contraseña) y Google OAuth2 para administradores
+- **Sesiones:** express-session (cookies seguras, expiración por inactividad)
+- **Servicios:** Email (SMTP), reCAPTCHA, GeoLocation (ipstack), Fake Payment API
+
+### Estructura de carpetas
 
 La estructura actual del proyecto es la siguiente:
 
@@ -109,135 +111,49 @@ CREATE TABLE payments (
 )
 ```
 
-## 3. Características Implementadas
+## 3. Características Principales
 
-### 3.1 Formulario de Contacto
-- Validación de campos y reCAPTCHA
-- Captura de IP y país del usuario
-- Timestamp automático
-- Almacenamiento en SQLite
-- Notificación por correo a múltiples destinatarios
-- Vista administrativa protegida
+### 4.1 Formularios
+- **Contacto:** Validación, reCAPTCHA, geolocalización, notificación por email, almacenamiento seguro.
+- **Pago:** Validación, integración con Fake Payment API, confirmación automática por email, almacenamiento seguro.
 
-### 3.2 Formulario de Pago
-- Validación de tarjeta de crédito y campos
-- Selección de servicios y monedas
-- Almacenamiento seguro
-- Integración con Fake Payment API
-- Confirmación automática por correo electrónico al usuario
-- Vista administrativa protegida
+### 4.2 Panel de Administración
+- **Login seguro:**
+  - Local (email/contraseña, bcrypt)
+  - Google OAuth2 (botón "Iniciar con Google")
+- **Gestión de sesión:**
+  - express-session, cookies seguras (`httpOnly`, `sameSite`, `secure` en producción)
+  - Expiración automática por inactividad (15 minutos)
+  - Logout visual con icono
+- **Cambio de contraseña**
+- **Vistas protegidas:** `/admin/dashboard`, `/admin/contacts`, `/admin/payments`
+- **Búsqueda en tablas:** JS en cliente (por nombre/email en contactos, por fecha/servicio/estado en pagos)
+- **Metadatos Open Graph y Twitter Card**
+- **Estadísticas y visualización de datos**
 
-### 3.3 Panel de Administración
-- Login seguro con JWT
-- Dashboard con estadísticas y gráficos
-- Cambio de contraseña admin
-- Visualización de contactos y pagos
-
-## 4. Seguridad
-- Validaciones y sanitización de inputs
+### 4.3 Seguridad
+- Validación y sanitización de inputs
 - Prevención de SQL injection
-- Uso de JWT para autenticación admin
+- Gestión segura de sesiones (NO se usa JWT)
 - Variables de entorno para credenciales
-- Cookies httpOnly para tokens
-
-## 5. Rutas Implementadas
-
-### 5.1 Contactos
-- POST `/contact/add`: Añadir nuevo contacto
-- GET `/admin/contacts`: Ver todos los contactos (admin)
-
-### 5.2 Pagos
-- POST `/payment/add`: Procesar nuevo pago
-- GET `/admin/payments`: Ver todos los pagos (admin)
-- GET `/payment/success`: Confirmación de pago
-- GET `/api/payments`: API de pagos (admin)
-
-### 5.3 Admin
-- GET `/admin/login`: Login admin
-- POST `/admin/login`: Procesar login
-- GET `/admin/dashboard`: Dashboard admin
-- GET `/admin/change-password`: Formulario de cambio de contraseña
-- POST `/admin/change-password`: Procesar cambio de contraseña
-- GET `/admin/logout`: Cerrar sesión
 
 ---
 
-# Documentación de Servicios e Integraciones
+## 5. Rutas Principales
 
-Este proyecto implementa un sistema web con múltiples servicios y medidas de seguridad, pedidas a detalle dentro de las especificaciones de la Task 3. A continuación se describen detalladamente las integraciones y servicios añadidos:
-
----
-
-## 1. Geolocalización por IP (ipstack).
-
-En esta ocasión preferí utilizar ipstack por encima de ipapi, esta decisión la tome después de investigar y leer que esta API suele ser mas efectiva y precisa.
-
-- **Descripción:** Permite obtener el país de origen del usuario a partir de su dirección IP.
-- **Implementación:**
-  - Servicio en `src/services/GeoLocation.ts`.
-  - Utiliza la API de ipstack para consultar la IP y obtener el país.
-  - El resultado se almacena en la base de datos y se utiliza en notificaciones por correo.
-- **Uso:**
-  - Se llama una sola vez por contacto para optimizar el consumo de la API. (En este caso son 100 usos debido al plan gratuito).
-  - La clave de ipstack se almacena en el archivo `.env` como `IPSTACK_API_KEY`.
-
-## 2. Google Analytics
-- **Descripción:** Permite el seguimiento de visitas y eventos en la web.
-- **Implementación:**
-  - El código de seguimiento se incluye en `src/views/partials/head.ejs`.
-  - El ID de medición se almacena en `.env` como `GA_MEASUREMENT_ID`.
-- **Ventaja:**
-  - Permite analizar el tráfico y comportamiento de los usuarios sin exponer el ID en el código fuente.
-
-## 3. Google reCAPTCHA
-- **Descripción:** Protege los formularios contra bots y spam. Se optó por el reCAPTCHA v2.
-- **Implementación:**
-  - Integrado en el formulario de contacto (`contact.ejs`) y validado en backend (`src/services/ReCaptcha.ts`).
-  - El token del usuario se verifica contra la API de Google antes de aceptar el formulario.
-  - La clave secreta se almacena en `.env` como `RECAPTCHA_SECRET_KEY` y la clave pública como `RECAPTCHA_SITE_KEY`.
-- **Ventaja:**
-  - Mejora la seguridad y la experiencia del usuario.
-
-## 4. Notificación por correo electrónico
-- **Descripción:** Envía un email al administrador cada vez que se recibe un nuevo contacto.
-- **Implementación:**
-  - Servicio en `src/services/EmailService.ts` usando `nodemailer`.
-  - Los datos del contacto y su país se incluyen en el correo.
-  - Las credenciales SMTP se almacenan en `.env` (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`).
-- **Ventaja:**
-  - Permite recibir notificaciones inmediatas y mantener la privacidad de las credenciales.
-
-## 5. Integración con Fake Payment API
-- **Descripción:** Permite simular pagos y probar distintos escenarios (aprobado, rechazado, error, fondos insuficientes).
-- **Implementación:**
-  - Servicio en `src/services/PaymentService.ts`.
-  - El controlador de pagos (`PaymentController.ts`) envía los datos a la API y guarda el resultado (incluyendo el ID de transacción y estado) en la base de datos.
-  - Los endpoints y credenciales de la API se almacenan en `.env` (`FAKEPAYMENT_API_URL`, `FAKEPAYMENT_API_KEY`).
-  - Panel de administración visual para pagos en `/admin/payments?token=...`.
-- **Ventaja:**
-  - Permite pruebas seguras y controladas sin exponer datos reales.
-
-## 6. Seguridad con variables de entorno
-- **Descripción:** Todas las credenciales y datos sensibles se almacenan en el archivo `.env` y nunca en el código fuente.
-- **Implementación:**
-  - Uso de `dotenv` para cargar variables de entorno.
-  - Ejemplos de variables:
-    - `RECAPTCHA_SECRET_KEY`, `RECAPTCHA_SITE_KEY`
-    - `IPSTACK_API_KEY`
-    - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`
-    - `FAKEPAYMENT_API_URL`, `FAKEPAYMENT_API_KEY`
-- **Ventaja:**
-  - Facilita el despliegue seguro y evita la exposición accidental de credenciales.
-
-## Confirmación automática por correo electrónico
-
-- Cuando un usuario completa exitosamente un formulario de pago, el sistema envía automáticamente un correo de confirmación y bienvenida a la dirección proporcionada.
-- El correo incluye detalles del pago y un mensaje de agradecimiento.
-- Esta funcionalidad está implementada en `EmailService.ts` y es llamada desde el controlador de pagos.
-
-## Seguridad JWT
-
-- El secreto JWT (`JWT_SECRET`) se encuentra en el archivo `.env` y debe ser único y seguro. Ejemplo: `JWT_SECRET=3x@mpl3S3cr3tK3y!2023`.
+- `/contact/add` (POST): Añadir contacto
+- `/payment/add` (POST): Procesar pago
+- `/admin/login` (GET/POST): Login admin (local y Google)
+- `/admin/logout` (GET): Logout admin
+- `/admin/dashboard` (GET): Dashboard admin
+- `/admin/contacts` (GET): Ver contactos (admin)
+- `/admin/payments` (GET): Ver pagos (admin)
+- `/admin/change-password` (GET/POST): Cambio de contraseña admin
 
 ---
+
+## 6. Créditos y Notas
+
+- Desarrollado por Carmine Bernabei
+- Para dudas o mejoras, contactar al autor
 

@@ -17,11 +17,11 @@ interface PaymentRequest {
 }
 
 interface PaymentResponse {
-  // Define la interfaz PaymentResponse para la respuesta del servicio de pago
-  success: boolean; // Indica si el pago fue exitoso
-  message: string; 
-  transactionId?: string; // ID de la transacción si el pago fue exitoso
-  error?: {
+    // Define la interfaz PaymentResponse para la respuesta del servicio de pago
+    success: boolean; // Indica si el pago fue exitoso
+    message: string; 
+    transactionId?: string; // ID de la transacción si el pago fue exitoso
+    error?: {
     // Detalles del error si el pago falló
     code: string; // Código de error
     message: string; // Mensaje de error

@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { AdminModel } from '../models/AdminModel';
-import jwt from 'jsonwebtoken';
 
 export class AdminController {
     private adminModel = new AdminModel();
@@ -15,8 +14,8 @@ export class AdminController {
                 return;
             }
 
-            const token = jwt.sign({ email }, process.env.JWT_SECRET || 'secret', { expiresIn: '24h' });
-            res.cookie('adminToken', token, { httpOnly: true });
+            req.session.isAdmin = true;
+            req.session.userId = email;
             res.redirect('/admin/dashboard');
         } catch (error) {
             console.error('Error en login:', error);
@@ -43,12 +42,13 @@ export class AdminController {
     }
 
     public logout(req: Request, res: Response): void {
-        res.clearCookie('adminToken');
-        res.redirect('/admin/login');
+        req.session.destroy(() => {
+            res.redirect('/admin/login');
+        });
     }
 
     public async changePassword(req: Request, res: Response): Promise<void> {
-        const email = this.getEmailFromToken(req);
+        const email = typeof req.session.userId === 'string' ? req.session.userId : '';
         const { oldPassword, newPassword, confirmPassword } = req.body;
         if (req.method === 'GET') {
             return res.render('admin/change-password');
@@ -71,16 +71,6 @@ export class AdminController {
             }
         } catch (err) {
             res.render('admin/change-password', { error: 'Error al cambiar la contraseña.' });
-        }
-    }
-
-    private getEmailFromToken(req: Request): string {
-        try {
-            const token = req.cookies.adminToken;
-            const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'secret');
-            return decoded.email;
-        } catch {
-            return '';
         }
     }
 }

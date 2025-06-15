@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
     <%- include('../partials/head') %>
-    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
-            <h2>Acceso al Panel de Administración</h2>
+            <h2>Login de Administración</h2>
             <% if (locals.error) { %>
                 <div class="login-error"><%= error %></div>
             <% } %>
@@ -21,7 +21,16 @@
                     <input id="password" name="password" type="password" required placeholder="Contraseña">
                 </div>
                 <button type="submit" class="btn btn-blue">Iniciar Sesión</button>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a>O</a>
+                </div>
             </form>
+            <div style="text-align:center; margin-top: 20px;">
+                <img src="https://logodix.com/logo/8.jpg" alt="Google" style="width:140px; vertical-align:middle; margin-left: 5px; margin-right:8px; margin-bottom: 5px;">
+                <a href="/auth/google" class="btn btn-google" style="display:inline-block; background:#fff; color:#444; border:1px solid #ccc; padding:10px 20px; border-radius:4px; text-decoration:none; font-weight:500;">
+                     Iniciar sesión con Google
+                </a>
+            </div>
         </div>
     </div>
 </body>

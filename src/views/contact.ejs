@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <%- include('partials/head') %>
+    <% const ogTitle = 'Contacto - AquaRepair'; %>
+    <% const ogDescription = '¿Tienes una emergencia o consulta? Contáctanos y recibe atención inmediata de expertos en plomería.'; %>
+    <% const ogImage = 'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80'; %>
+    <% const ogUrl = 'https://aquarepair.com/contact'; %>
+    <%- include('partials/head', { ogTitle, ogDescription, ogImage, ogUrl, name }) %>
     <link rel="stylesheet" href="/css/contact-form.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <% const ogTitle = 'AquaRepair - Soluciones de Plomería Profesional 24/7'; %>
+    <% const ogDescription = 'Expertos en plomería, atención inmediata, servicios de emergencia y garantía total. ¡Contáctanos para resolver cualquier problema de agua!'; %>
+    <% const ogImage = 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80'; %>
+    <% const ogUrl = 'https://aquarepair.com'; %>
+    <%- include('partials/head', { ogTitle, ogDescription, ogImage, ogUrl, name }) %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= name %> - Servicio de Plomería Profesional</title>

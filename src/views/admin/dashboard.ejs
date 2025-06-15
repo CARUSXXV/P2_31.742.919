@@ -15,6 +15,11 @@
             <a href="/admin/payments" class="btn btn-green">Ver Pagos</a>
             <a href="/api/payments" class="btn btn-purple">Ver API Pagos (JSON)</a>
             <a href="/admin/change-password" class="btn btn-orange">Cambiar Contraseña</a>
+            <% if (typeof session !== 'undefined' && session.isAdmin) { %>
+                <a href="/admin/logout" class="btn btn-logout" style="display:inline-flex; align-items:center; background:#f44336; color:#fff; padding:8px 16px; border-radius:4px;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" alt="Logout" style="width:20px; height:20px; margin-right:6px; filter:invert(1);"> <!-- Icono blanco -->
+                </a>
+            <% } %>
         </div>
         <div class="admin-summary">
             <div class="summary-card">

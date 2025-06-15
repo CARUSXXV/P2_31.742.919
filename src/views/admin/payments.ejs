@@ -1,46 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pagos Registrados</title>
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
     <div class="container">
-        <h2 class="title">Pagos registrados</h2>
-        <div class="table-container">
-            <table class="table">
-                <thead class="table-header">
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Nombre Titular</th>
-                        <th>Monto</th>
-                        <th>Moneda</th>
-                        <th>Servicio</th>
-                        <th>Transacción</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody class="table-body">
-                    <% payments.forEach(function(payment) { %>
-                        <tr>
-                            <td><%= payment.id %></td>
-                            <td><%= payment.email %></td>
-                            <td><%= payment.cardholder_name %></td>
-                            <td><%= payment.amount %></td>
-                            <td><%= payment.currency %></td>
-                            <td><%= payment.service_id %></td>
-                            <td><%= payment.transaction_id || '-' %></td>
-                            <td><%= payment.status || '-' %></td>
-                            <td><%= payment.created_at %></td>
-                        </tr>
-                    <% }); %>
-                </tbody>
-            </table>
+      <h2 class="title">Pagos registrados</h2>
+      <div class="filter-container">
+        <div class="date-filter-group">
+          <label for="dateFrom">Desde:</label>
+          <input type="date" id="dateFrom" />
         </div>
+        <div class="date-filter-group">
+          <label for="dateTo">Hasta:</label>
+          <input type="date" id="dateTo" />
+        </div>
+        <input type="text" id="serviceFilter" placeholder="Servicio" />
+        <input type="text" id="statusFilter" placeholder="Estado de pago" />
+        <button onclick="clearFilters()">Limpiar filtros</button>
+      </div>
+      <div class="table-container">
+        <table class="table" id="paymentsTable">
+          <thead class="table-header">
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Nombre Titular</th>
+              <th>Monto</th>
+              <th>Moneda</th>
+              <th>Servicio</th>
+              <th>Transacción</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <% payments.forEach(function(payment) { %>
+            <tr>
+              <td><%= payment.id %></td>
+              <td><%= payment.email %></td>
+              <td><%= payment.cardholder_name %></td>
+              <td><%= payment.amount %></td>
+              <td><%= payment.currency %></td>
+              <td><%= payment.service_id %></td>
+              <td><%= payment.transaction_id || '-' %></td>
+              <td><%= payment.status || '-' %></td>
+              <td><%= payment.created_at %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
     </div>
-</body>
+    <script>
+      function clearFilters() {
+        document.getElementById("dateFrom").value = "";
+        document.getElementById("dateTo").value = "";
+        document.getElementById("serviceFilter").value = "";
+        document.getElementById("statusFilter").value = "";
+        filterPayments();
+      }
+      function filterPayments() {
+        const dateFrom = document.getElementById("dateFrom").value;
+        const dateTo = document.getElementById("dateTo").value;
+        const service = document
+          .getElementById("serviceFilter")
+          .value.toLowerCase();
+        const status = document
+          .getElementById("statusFilter")
+          .value.toLowerCase();
+        const rows = document.querySelectorAll("#paymentsTable tbody tr");
+        rows.forEach((row) => {
+          const fecha = row.children[8].textContent.split("T")[0];
+          const servicio = row.children[5].textContent.toLowerCase();
+          const estado = row.children[7].textContent.toLowerCase();
+          let show = true;
+          if (dateFrom && fecha < dateFrom) show = false;
+          if (dateTo && fecha > dateTo) show = false;
+          if (service && !servicio.includes(service)) show = false;
+          if (status && !estado.includes(status)) show = false;
+          row.style.display = show ? "" : "none";
+        });
+      }
+      document
+        .getElementById("dateFrom")
+        .addEventListener("input", filterPayments);
+      document
+        .getElementById("dateTo")
+        .addEventListener("input", filterPayments);
+      document
+        .getElementById("serviceFilter")
+        .addEventListener("input", filterPayments);
+      document
+        .getElementById("statusFilter")
+        .addEventListener("input", filterPayments);
+    </script>
+  </body>
 </html>

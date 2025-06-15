@@ -1,47 +1,182 @@
+:root {
+    --primary-text-color: #333;
+    --secondary-text-color: #555;
+    --border-color: #ddd;
+    --light-bg-color: #f3f3f3;
+    --white-color: #fff;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1.5rem;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--primary-text-color);
+    background-color: #f9f9f9;
+}
+
 .container {
-    padding: 2rem;
+    padding: var(--spacing-lg);
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: 55px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius-md);
+    background-color: var(--white-color);
 }
 
 .title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-text-color);
+    text-align: center;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--light-bg-color);
+    justify-content: center;
 }
 
 .table-container {
     overflow-x: auto;
+    margin-top: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
-    border-radius: 8px;
+    background-color: var(--white-color);
+    border-radius: var(--border-radius-md);
     overflow: hidden;
 }
 
 .table-header {
-    background-color: #f3f3f3;
+    background-color: var(--light-bg-color);
 }
 
 .table-header th {
-    padding: 0.75rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     text-align: left;
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
     font-weight: 600;
-    color: #555;
+    color: var(--secondary-text-color);
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .table-body tr {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+.table-body tr:last-child {
+    border-bottom: none;
+}
+
+.table-body tr:hover {
+    background-color: #fcfcfc;
 }
 
 .table-body td {
-    padding: 0.75rem;
-    font-size: 0.875rem;
-    color: #333;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--primary-text-color);
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+#searchContact {
+    width: clamp(200px, 30%, 300px);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--primary-text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#searchContact:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.search-container {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+    margin-bottom: var(--spacing-md); 
+}
+
+.filter-container {
+    display: flex; 
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: flex-end; 
+    margin-bottom: var(--spacing-md); 
+    padding: var(--spacing-sm);
+    background-color: var(--light-bg-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.filter-container .date-filter-group {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    flex-grow: 1;
+    min-width: 150px; 
+}
+
+.filter-container label {
+    font-size: var(--font-size-sm);
+    color: var(--secondary-text-color);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+}
+
+.filter-container input[type="date"],
+.filter-container input[type="text"] {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--primary-text-color);
+    flex-grow: 1; 
+    max-width: 200px; 
+    box-sizing: border-box; 
+}
+
+.filter-container input[type="date"]:focus,
+.filter-container input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.filter-container button {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: #f57171;
+    color: var(--button-text-color);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-end; 
+}
+
+.filter-container button:hover {
+    background-color: var(--button-hover-bg-color);
 }

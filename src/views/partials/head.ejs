@@ -1,6 +1,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><%= typeof name !== 'undefined' ? name + ' - ' : '' %>Servicio de Plomería Profesional</title>
+<title><%= typeof ogTitle !== 'undefined' ? ogTitle : (typeof name !== 'undefined' ? name + ' - ' : '') %>Servicio de Plomería Profesional</title>
+<!-- Etiquetas Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="<%= typeof ogTitle !== 'undefined' ? ogTitle : 'AquaRepair - Soluciones de Plomería Profesional' %>">
+<meta property="og:description" content="<%= typeof ogDescription !== 'undefined' ? ogDescription : 'Servicio de plomería profesional 24/7, atención inmediata y garantía total.' %>">
+<meta property="og:image" content="<%= typeof ogImage !== 'undefined' ? ogImage : 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80' %>">
+<meta property="og:url" content="<%= typeof ogUrl !== 'undefined' ? ogUrl : 'https://aquarepair.com' %>">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= typeof ogTitle !== 'undefined' ? ogTitle : 'AquaRepair - Soluciones de Plomería Profesional' %>">
+<meta name="twitter:description" content="<%= typeof ogDescription !== 'undefined' ? ogDescription : 'Servicio de plomería profesional 24/7, atención inmediata y garantía total.' %>">
+<meta name="twitter:image" content="<%= typeof ogImage !== 'undefined' ? ogImage : 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80' %>">
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/droplet.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
