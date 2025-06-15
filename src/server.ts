@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy, Profile } from "passport-google-oauth20";
+import connectSqlite3 from "connect-sqlite3";
 
 // Extender la interfaz Request para TypeScript
 import { Request } from "express";
@@ -40,9 +41,15 @@ app.use(cookieParser()); // Middleware para leer cookies (necesario para autenti
 app.use(bodyParser.urlencoded({ extended: true })); // Middleware para parsear bodies url-encoded (formularios).
 app.use(bodyParser.json()); // Middleware para parsear bodies JSON.
 
+const SQLiteStore = connectSqlite3(session);
+
 // Configuración de sesión segura
 app.use(
   session({
+    store: new SQLiteStore({
+      db: "sessions.sqlite",
+      dir: "./database",
+    }) as any,
     secret: process.env.SESSION_SECRET || "supersecret",
     resave: false,
     saveUninitialized: false,
