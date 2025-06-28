@@ -15,36 +15,36 @@
     <div class="contact-form">
         <div class="container">
             <div class="form-wrapper">
-                <h2>Contáctanos</h2>
+                <h2><%= __("contact_us") %></h2>
                 <% if (locals.errors) { %>
                     <div class="notification error">
                         <% errors.forEach(function(error) { %>
-                            <%= error.msg %>
+                            <%= __(error.msg) %>
                         <% }); %>
                     </div>
                 <% } %>
                 <% if (locals.success) { %>
                     <div class="notification success" id="success-notification">
-                        ¡Mensaje enviado correctamente!
+                        <%= __("payment_success") %>
                     </div>
                 <% } %>
                 <form action="/contact/add" method="POST">
                     <div>
-                        <label for="email"><i class="ri-mail-line"></i> Correo electrónico</label>
+                        <label for="email"><i class="ri-mail-line"></i> <%= __("email") || 'Correo electrónico' %></label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div>
-                        <label for="name"><i class="ri-user-line"></i> Nombre completo</label>
+                        <label for="name"><i class="ri-user-line"></i> <%= __("name") || 'Nombre completo' %></label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div>
-                        <label for="comment"><i class="ri-message-3-line"></i> Comentario</label>
+                        <label for="comment"><i class="ri-message-3-line"></i> <%= __("comment") || 'Comentario' %></label>
                         <textarea id="comment" name="comment" required></textarea>
                     </div>
                     <div class="recaptcha-container">
                         <div class="g-recaptcha" data-sitekey="<%= recaptchaSiteKey %>"></div>
                     </div>
-                    <button type="submit"><i class="ri-send-plane-line"></i> Enviar mensaje</button>
+                    <button type="submit"><i class="ri-send-plane-line"></i> <%= __("submit") || 'Enviar mensaje' %></button>
                 </form>
             </div>
         </div>

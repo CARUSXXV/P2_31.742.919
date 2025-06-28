@@ -8,23 +8,24 @@ export class PaymentController {
   private paymentModel = new PaymentModel();
 
   public validations = [
-    body('email').isEmail().withMessage('Email inválido'),
-    body('cardholder_name').notEmpty().withMessage('El nombre del titular es requerido'),
-    body('card_number').isCreditCard().withMessage('Número de tarjeta inválido'),
-    body('expiry_month').isInt({ min: 1, max: 12 }).withMessage('Mes inválido'),
-    body('expiry_year').isInt({ min: 2024 }).withMessage('Año inválido'),
-    body('cvv').isLength({ min: 3, max: 4 }).withMessage('CVV inválido'),
-    body('amount').isFloat({ min: 0.01 }).withMessage('Monto inválido'),
-    body('currency').isIn(['USD', 'EUR']).withMessage('Moneda inválida'),
-    body('service_id').isInt().withMessage('Servicio inválido')
+    body('email').isEmail().withMessage('invalid_email'),
+    body('cardholder_name').notEmpty().withMessage('required_field'),
+    body('card_number').isCreditCard().withMessage('invalid_card_number'),
+    body('expiry_month').isInt({ min: 1, max: 12 }).withMessage('invalid_month'),
+    body('expiry_year').isInt({ min: 2024 }).withMessage('invalid_year'),
+    body('cvv').isLength({ min: 3, max: 4 }).withMessage('invalid_cvv'),
+    body('amount').isFloat({ min: 0.01 }).withMessage('invalid_amount'),
+    body('currency').isIn(['USD', 'EUR']).withMessage('invalid_currency'),
+    body('service_id').isInt().withMessage('invalid_service')
   ];
 
   public async add(req: Request, res: Response): Promise<void> {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
+        const reqAny = req as any;
         res.render('payment', { 
-          errors: errors.array(),
+          errors: errors.array().map(e => ({ msg: reqAny.__(e.msg) })),
           companyInfo: req.app.locals.companyInfo 
         });
         return;

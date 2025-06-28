@@ -3,12 +3,13 @@
 <head>
     <%- include('../partials/head') %>
     <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <title><%= __("dashboard") %></title>
 </head>
 <body>
     <%- include('../partials/navbar') %>
     <div class="container">
         <div class="admin-header">
-            <h2>Panel de Administración</h2>
+            <h2 class="title"><%= __("dashboard") %></h2>
         </div>
         <div class="admin-links">
             <a href="/admin/contacts" class="btn btn-blue">Ver Contactos</a>

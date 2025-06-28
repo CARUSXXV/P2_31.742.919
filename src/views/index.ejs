@@ -27,23 +27,65 @@
           <i class="ri-drop-line"></i>
           <%= name %>
         </a>
+        <!-- Selector de idioma -->
+        <form id="lang-form" action="" method="get">
+          <select name="lang" id="lang" onchange="this.form.submit()">
+            <option value="es" <%= (locale === 'es' ? 'selected' : '') %>>es</option>
+            <option value="en" <%= (locale === 'en' ? 'selected' : '') %>>en</option>
+          </select>
+        </form>
         <button class="mobile-menu-btn">
           <i class="ri-menu-line"></i>
         </button>
         <div class="nav-links">
-          <a href="#inicio">Inicio</a>
-          <a href="#servicios">Servicios</a>
-          <a href="#proyectos">Proyectos</a>
-          <a href="#testimonios">Testimonios</a>
-          <a href="#preguntas">FAQ</a>
-          <a href="#contacto">Contacto</a>
+          <a href="#inicio"><%= __("Inicio") %></a>
+          <a href="#servicios"><%= __("Servicios") %></a>
+          <a href="#proyectos"><%= __("Proyectos") %></a>
+          <a href="#testimonios"><%= __("Testimonios") %></a>
+          <a href="#preguntas"><%= __("FAQ") %></a>
+          <a href="#contacto"><%= __("Contacto") %></a>
         </div>
         <a href="tel:+584120367234" class="cta-button emergency-contact">
           <i class="ri-phone-line"></i>
-          Emergencias 24/7
+          <%= __("Emergencias 24/7") %>
         </a>
       </div>
     </nav>
+    <style>
+      #lang-form {
+        position: fixed;
+        top: 1.1rem;
+        right: 1.1rem;
+        z-index: 1100;
+      }
+      #lang-form select {
+        padding: 0.1rem 0.7rem;
+        border-radius: 1.2rem;
+        border: 1.5px solid #258add;
+        font-size: 0.95rem;
+        background: #258add;
+        color: #fff;
+        font-weight: 600;
+        outline: none;
+        cursor: pointer;
+        min-width: 2.5rem;
+        text-align: center;
+      }
+      @media (max-width: 768px) {
+        #lang-form {
+          position: static;
+          display: flex;
+          align-items: center;
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+          z-index: auto;
+        }
+      }
+      #lang-form select:focus {
+        border-color: #1e5fa6;
+        box-shadow: 0 0 0 2px #258add33;
+      }
+    </style>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
@@ -54,18 +96,17 @@
       </video>
       <div class="hero-overlay"></div>
       <div class="container hero-content">
-        <h1>Soluciones de Plomería Profesional</h1>
+        <h1><%= __("Soluciones de Plomería Profesional") %></h1>
         <p>
-          Expertos disponibles 24/7 para resolver cualquier emergencia con la
-          máxima calidad y eficiencia
+          <%= __("Expertos disponibles 24/7 para resolver cualquier emergencia con la máxima calidad y eficiencia") %>
         </p>
         <a href="/contact" class="cta-button">
           <i class="ri-customer-service-line"></i>
-          Solicitar Servicio
+          <%= __("Solicitar Servicio") %>
         </a>
         <a href="/payment" class="cta-button" style="background: linear-gradient(45deg, #00c853, #64dd17)">
           <i class="ri-secure-payment-line"></i>
-          Pagar Servicio
+          <%= __("Pagar Servicio") %>
       </a>
       </div>
     </section>
@@ -77,8 +118,8 @@
           <% features.forEach(function(feature) { %>
           <div class="feature-card" data-aos="fade-up">
             <i class="ri-<%= feature.icon %>-line"></i>
-            <h3><%= feature.title %></h3>
-            <p><%= feature.description %></p>
+            <h3><%= __(feature.title) %></h3>
+            <p><%= __(feature.description) %></p>
           </div>
           <% }); %>
         </div>
@@ -89,8 +130,8 @@
     <section id="servicios" class="services">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
-          <h2>Nuestros Servicios</h2>
-          <p>Soluciones profesionales para todas tus necesidades</p>
+          <h2><%= __("Nuestros Servicios") %></h2>
+          <p><%= __("Soluciones profesionales para todas tus necesidades") %></p>
         </div>
         <div class="services-grid">
           <% services.forEach(function(service, index) { %>
@@ -103,14 +144,14 @@
               <img src="<%= service.image %>" alt="<%= service.title %>" />
             </div>
             <div class="service-content">
-              <h3><%= service.title %></h3>
-              <p><%= service.description %></p>
+              <h3><%= __(service.title) %></h3>
+              <p><%= __(service.description) %></p>
               <div class="service-details">
                 <ul>
                   <% service.details.forEach(function(detail) { %>
                   <li>
                     <i class="ri-check-line"></i>
-                    <%= detail %>
+                    <%= __(detail) %>
                   </li>
                   <% }); %>
                 </ul>
@@ -126,8 +167,8 @@
     <section id="proyectos" class="projects">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
-          <h2>Proyectos Destacados</h2>
-          <p>Conoce algunos de nuestros trabajos más relevantes</p>
+          <h2><%= __("Proyectos Destacados") %></h2>
+          <p><%= __("Conoce algunos de nuestros trabajos más relevantes") %></p>
         </div>
         <div class="projects-grid">
           <% projects.forEach(function(project) { %>
@@ -138,9 +179,9 @@
               class="project-image"
             />
             <div class="project-overlay">
-              <h3><%= project.title %></h3>
-              <p><%= project.description %></p>
-              <span class="project-category"><%= project.category %></span>
+              <h3><%= __(project.title) %></h3>
+              <p><%= __(project.description) %></p>
+              <span class="project-category"><%= __(project.category) %></span>
             </div>
           </div>
           <% }); %>
@@ -155,7 +196,7 @@
           <% stats.forEach(function(stat) { %>
           <div class="stat-item" data-aos="fade-up">
             <h3 class="floating"><%= stat.number %></h3>
-            <p><%= stat.label %></p>
+            <p><%= __(stat.label) %></p>
           </div>
           <% }); %>
         </div>
@@ -166,8 +207,8 @@
     <section id="testimonios" class="testimonials">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
-          <h2>Lo que dicen nuestros clientes</h2>
-          <p>Testimonios de clientes satisfechos</p>
+          <h2><%= __("Lo que dicen nuestros clientes") %></h2>
+          <p><%= __("Testimonios de clientes satisfechos") %></p>
         </div>
         <div class="swiper testimonials-slider" data-aos="fade-up">
           <div class="swiper-wrapper">
@@ -180,7 +221,7 @@
                     alt="<%= testimonial.author %>"
                   />
                 </div>
-                <p>"<%= testimonial.text %>"</p>
+                <p>"<%= __(testimonial.text) %>"</p>
                 <div class="testimonial-author"><%= testimonial.author %></div>
                 <div class="testimonial-rating">
                   <% for(let i = 0; i < testimonial.rating; i++) { %>
@@ -200,14 +241,14 @@
     <section id="preguntas" class="faq">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
-          <h2>Preguntas Frecuentes</h2>
-          <p>Resolvemos tus dudas</p>
+          <h2><%= __("Preguntas Frecuentes") %></h2>
+          <p><%= __("Resolvemos tus dudas") %></p>
         </div>
         <div class="faq-grid">
           <% faqs.forEach(function(faq) { %>
           <div class="faq-item" data-aos="fade-up">
-            <div class="faq-question"><%= faq.question %></div>
-            <div class="faq-answer"><%= faq.answer %></div>
+            <div class="faq-question"><%= __(faq.question) %></div>
+            <div class="faq-answer"><%= __(faq.answer) %></div>
           </div>
           <% }); %>
         </div>
@@ -215,20 +256,18 @@
     </section>
 
     
-
-
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="container" data-aos="fade-up">
-        <h2>¿Necesitas ayuda urgente?</h2>
-        <p>Estamos disponibles 24/7 para atender tu emergencia</p>
+        <h2><%= __("¿Necesitas ayuda urgente?") %></h2>
+        <p><%= __("Estamos disponibles 24/7 para atender tu emergencia") %></p>
         <a href="/contact"  class="cta-button cta-button-call">
           <i class="ri-phone-line"></i>
-          ¡Contáctanos ahora!
+          <%= __("¡Contáctanos ahora!") %>
         </a>
         <a href="/payment" class="cta-button" style="background: linear-gradient(45deg, #00c853, #64dd17);">
           <i class="ri-secure-payment-line"></i>
-          Pagar Online
+          <%= __("Pagar Online") %>
       </a>
       </div>
     </section>
@@ -238,19 +277,19 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-section">
-            <h3>Contacto</h3>
+            <h3><%= __("Contacto") %></h3>
             <p><i class="ri-phone-fill"></i> <%= phone %></p>
             <p><i class="ri-mail-fill"></i> <%= email %></p>
             <p><i class="ri-map-pin-fill"></i> <%= address %></p>
           </div>
           <div class="footer-section">
-            <h3>Certificaciones</h3>
+            <h3><%= __("Certificaciones") %></h3>
             <% certifications.forEach(function(cert) { %>
-            <p><i class="ri-check-line"></i> <%= cert %></p>
+            <p><i class="ri-check-line"></i> <%= __(cert) %></p>
             <% }); %>
           </div>
           <div class="footer-section">
-            <h3>Síguenos</h3>
+            <h3><%= __("Síguenos") %></h3>
             <div class="social-links">
               <a href="https://www.facebook.com"><i class="ri-facebook-fill"></i></a>
               <a href="https://www.instagram.com"><i class="ri-instagram-fill"></i></a>
@@ -266,8 +305,7 @@
           "
         >
           <p>
-            &copy; <%= new Date().getFullYear() %> <%= name %>. Todos los
-            derechos reservados.
+            &copy; <%= new Date().getFullYear() %> <%= name %>. <%= __("Todos los derechos reservados.") %>
           </p>
         </div>
       </div>

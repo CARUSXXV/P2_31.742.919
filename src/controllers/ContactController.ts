@@ -11,10 +11,10 @@ export class ContactController {
 
   // Validaciones para los campos del formulario de contacto
   public validations = [
-    body('email').isEmail().withMessage('Email inválido'),
-    body('name').notEmpty().withMessage('El nombre es requerido'),
-    body('comment').notEmpty().withMessage('El comentario es requerido'),
-    body('g-recaptcha-response').notEmpty().withMessage('Por favor, complete el reCAPTCHA')
+    body('email').isEmail().withMessage('invalid_email'),
+    body('name').notEmpty().withMessage('required_field'),
+    body('comment').notEmpty().withMessage('required_field'),
+    body('g-recaptcha-response').notEmpty().withMessage('required_field')
   ];
 
   // Método para agregar un nuevo contacto
@@ -23,8 +23,9 @@ export class ContactController {
       // Verificar si hay errores de validación
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
+        const reqAny = req as any;
         res.render('contact', { 
-          errors: errors.array(),
+          errors: errors.array().map(e => ({ msg: reqAny.__(e.msg) })),
           recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
         });
         return;
@@ -33,8 +34,9 @@ export class ContactController {
       // Verificar el reCAPTCHA
       const isRecaptchaValid = await ReCaptcha.verify(req.body['g-recaptcha-response']);
       if (!isRecaptchaValid) {
+        const reqAny = req as any;
         res.render('contact', { 
-          errors: [{ msg: 'reCAPTCHA inválido' }],
+          errors: [{ msg: reqAny.__('invalid_recaptcha') }],
           recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY
         });
         return;

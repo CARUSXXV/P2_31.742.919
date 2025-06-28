@@ -8,6 +8,8 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy, Profile } from "passport-google-oauth20";
 import connectSqlite3 from "connect-sqlite3";
+import configureI18n from "./i18n";
+import { formatDate, formatCurrency } from "./utils/localeHelpers";
 
 // Extender la interfaz Request para TypeScript
 import { Request } from "express";
@@ -112,6 +114,19 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.locals.companyInfo = companyInfo;
   res.locals.session = req.session;
+  next();
+});
+
+// Configurar i18n antes de las rutas y antes de exponer helpers
+configureI18n(app);
+
+// Middleware para exponer idioma y helpers a las vistas
+app.use((req, res, next) => {
+  const reqAny = req as any;
+  res.locals.locale = reqAny.locale || 'es';
+  res.locals.__ = reqAny.__ ? reqAny.__.bind(reqAny) : (x: string) => x;
+  res.locals.formatDate = formatDate;
+  res.locals.formatCurrency = formatCurrency;
   next();
 });
 

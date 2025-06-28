@@ -13,14 +13,21 @@
 
     <div class="form-container">
       <div class="form-card">
-        <h2 class="form-title">Realizar pago</h2>
+        <h2 class="form-title"><%= __("payments") %></h2>
         <% if (locals.success && paymentResult) { %>
         <div class="notification success">¡Pago procesado correctamente!</div>
         <% } %> <% if (locals.errors) { %>
-        <div class="notification error">
-          <% errors.forEach(function(error) { %> <%= error.msg %> <% }); %>
-        </div>
-        <% } %>
+                    <div class="notification error">
+                        <% errors.forEach(function(error) { %>
+                            <%= error.msg %>
+                        <% }); %>
+                    </div>
+                <% } %>
+                <% if (locals.success) { %>
+                    <div class="notification success" id="success-notification">
+                        <%= __("payment_success") %>
+                    </div>
+                <% } %>
         <form
           action="/payment/add"
           method="POST"
@@ -28,33 +35,33 @@
           class="modern-form"
         >
           <div class="form-group">
-            <label class="form-label">Servicio</label>
+            <label class="form-label"><%= __("service") || 'Servicio' %></label>
             <select
               name="service_id"
               required
               class="form-select"
               id="service-select"
             >
-              <option value="1" data-amount="150">
-                Emergencias 24/7 - $150
-              </option>
-              <option value="2" data-amount="100">
-                Reparaciones Precisas - $100
-              </option>
-              <option value="3" data-amount="200">
-                Instalaciones Modernas - $200
-              </option>
+              <% if (locale === 'es') { %>
+                <option value="1" data-amount="1500">Emergencias 24/7 - <%= formatCurrency(1500, 'es') %></option>
+                <option value="2" data-amount="1000">Reparaciones Precisas - <%= formatCurrency(1000, 'es') %></option>
+                <option value="3" data-amount="2000">Instalaciones Modernas - <%= formatCurrency(2000, 'es') %></option>
+              <% } else { %>
+                <option value="1" data-amount="150">24/7 Emergency - <%= formatCurrency(150, 'en') %></option>
+                <option value="2" data-amount="100">Precision Repairs - <%= formatCurrency(100, 'en') %></option>
+                <option value="3" data-amount="200">Modern Installations - <%= formatCurrency(200, 'en') %></option>
+              <% } %>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Correo electrónico</label>
+            <label class="form-label"><%= __("email") || 'Correo electrónico' %></label>
             <div class="input-icon-wrapper">
               <i class="ri-mail-line"></i>
               <input type="email" name="email" required class="form-input" />
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Nombre del titular</label>
+            <label class="form-label"><%= __("cardholder_name") || 'Nombre del titular' %></label>
             <div class="input-icon-wrapper">
               <i class="ri-user-line"></i>
               <input
@@ -66,7 +73,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Número de tarjeta</label>
+            <label class="form-label"><%= __("card_number") || 'Número de tarjeta' %></label>
             <div class="input-icon-wrapper">
               <i class="ri-bank-card-line"></i>
               <input
@@ -81,7 +88,7 @@
           </div>
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label">Mes</label>
+              <label class="form-label"><%= __("month") || 'Mes' %></label>
               <input
                 type="number"
                 name="expiry_month"
@@ -93,7 +100,7 @@
               />
             </div>
             <div class="form-group">
-              <label class="form-label">Año</label>
+              <label class="form-label"><%= __("year") || 'Año' %></label>
               <input
                 type="number"
                 name="expiry_year"
@@ -119,8 +126,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Moneda</label>
+            <label class="form-label"><%= __("currency") || 'Moneda' %></label>
             <select name="currency" required class="form-select">
+              <% if (locale === 'es') { %>
+                <option value="VES">VES</option>
+              <% } %>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
             </select>
@@ -128,7 +138,7 @@
           <input type="hidden" name="amount" id="amount-input" value="150" />
           <button type="submit" class="form-button payment-button">
             <i class="ri-secure-payment-line"></i>
-            Realizar pago
+            <%= __("submit") || 'Realizar pago' %>
           </button>
         </form>
       </div>

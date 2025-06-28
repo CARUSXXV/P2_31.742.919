@@ -8,17 +8,28 @@
             <i class="ri-menu-line"></i>
         </button>
         <div class="nav-links">
-            <a href="/">Inicio</a>
-            <a href="/#servicios">Servicios</a>
-            <a href="/#proyectos">Proyectos</a>
-            <a href="/#testimonios">Testimonios</a>
-            <a href="/contact">Contacto</a>
-            <a href="/payment">Pagos</a>
+            <a href="/"> <%= __("home") || 'Inicio' %> </a>
+            <a href="/#servicios"> <%= __("services") || 'Servicios' %> </a>
+            <a href="/#proyectos"> <%= __("projects") || 'Proyectos' %> </a>
+            <a href="/#testimonios"> <%= __("testimonials") || 'Testimonios' %> </a>
+            <a href="/contact"> <%= __("contact_us") || 'Contacto' %> </a>
+            <a href="/payment"> <%= __("payments") || 'Pagos' %> </a>
         </div>
         <a href="/contact" class="cta-button">
             <i class="ri-phone-line"></i>
-            Emergencias 24/7
+            <%= __("emergency") || 'Emergencias 24/7' %>
         </a>
+        <div class="lang-selector" style="margin-left: 1rem; display: flex; align-items: center;">
+            <label for="lang" style="margin-right: 0.5rem; font-weight: 500;">
+                <i class="ri-global-line"></i>
+            </label>
+            <form id="lang-form" action="" method="get" style="margin: 0;">
+                <select name="lang" id="lang" onchange="this.form.submit()" style="padding: 0.2rem 0.5rem; border-radius: 8px; border: 2px solid #5e5b5b; font-size: 0.9rem; background-color: #258add; cursor: pointer; color: #fff; font-weight: 500;">
+                    <option value="es" <%= (locale === 'es' ? 'selected' : '') %>><%= __('spanish') %></option>
+                    <option value="en" <%= (locale === 'en' ? 'selected' : '') %>><%= __('english') %></option>
+                </select>
+            </form>
+        </div>
         <style>
             @media (max-width: 768px) {
             .cta-button {

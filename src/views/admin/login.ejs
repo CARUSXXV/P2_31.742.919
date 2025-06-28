@@ -3,11 +3,12 @@
 <head>
     <%- include('../partials/head') %>
     <link rel="stylesheet" href="/css/login.css">
+    <title><%= __("login") %></title>
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
-            <h2>Login de Administración</h2>
+            <h2 class="title"><%= __("login") %></h2>
             <% if (locals.error) { %>
                 <div class="login-error"><%= error %></div>
             <% } %>
