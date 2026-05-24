@@ -1,13 +1,11 @@
-# MiniDocumentación del Proyecto "AquaRepair"
+# Proyecto Web - CoreStack, C.A.
 
-Nombre y Apellido: Carmine Bernabei
-C.I: 31.742.919
+**Nombre:** Carmine Bernabei
+**C.I:** 31.742.919
 
 ## 1. Descripción General
 
-"AquaRepair" es una aplicación web moderna para un servicio de plomería profesional, con experiencia de usuario optimizada, panel administrativo seguro y gestión eficiente de contactos y pagos.
-
----
+"CoreStack" es una aplicación web moderna para una empresa de ingeniería informática y desarrollo de software, con experiencia de usuario optimizada, panel administrativo seguro y gestión eficiente de contactos y pagos.
 
 ## 2. Estructura y Tecnologías
 
@@ -20,8 +18,6 @@ C.I: 31.742.919
 
 ### Estructura de carpetas
 
-La estructura actual del proyecto es la siguiente:
-
 - `/public`: Archivos estáticos (CSS, videos, imágenes)
   - `/css`: Hojas de estilo para formularios, paneles admin y estilos generales
   - `/videos`: Videos utilizados en la sección principal (Hero section)
@@ -30,7 +26,7 @@ La estructura actual del proyecto es la siguiente:
     - `AdminController.ts`: Login, dashboard y cambio de contraseña admin
     - `ContactController.ts`: Procesa y valida solicitudes de contacto
     - `PaymentController.ts`: Procesa y valida pagos
-  - `/middleware`: Middlewares personalizados (ej. autenticación JWT)
+  - `/middleware`: Middlewares personalizados
     - `auth.ts`: Middleware para proteger rutas admin
   - `/models`: Modelos y acceso a la base de datos
     - `AdminModel.ts`: Gestión de admins y credenciales
@@ -47,27 +43,16 @@ La estructura actual del proyecto es la siguiente:
     - `contact.ejs`: Formulario de contacto
     - `payment.ejs`: Formulario de pago
     - `/admin`: Paneles administrativos
-      - `contacts.ejs`: Visualización de contactos
-      - `payments.ejs`: Visualización de pagos
-      - `dashboard.ejs`: Dashboard con estadísticas
-      - `login.ejs`: Login admin
-      - `change-password.ejs`: Cambio de contraseña admin
     - `/partials`: Fragmentos reutilizables (head, navbar, footer, scripts)
   - `server.ts`: Servidor Express principal y configuración de rutas
   - `/scripts`: Scripts utilitarios (ej. creación de admin)
 - `database.sqlite`: Base de datos SQLite local
-- `.env`: Variables de entorno (no versionado)
+- `.env`: Variables de entorno
 - `README.md`: Documentación centralizada
 
-**Notas adicionales:**
-- Todos los servicios y credenciales sensibles se gestionan mediante variables de entorno.
-- El acceso a los paneles administrativos está protegido por JWT.
-- El sistema de correos usa una lista de destinatarios configurable en el código.
-- La documentación previa se ha centralizado en este archivo.
+## 3. Base de Datos
 
-## 2. Base de Datos
-
-### 2.1 Tablas
+### 3.1 Tablas
 
 **Admins**
 ```sql
@@ -111,49 +96,42 @@ CREATE TABLE payments (
 )
 ```
 
-## 3. Características Principales
+## 4. Características Principales
 
 ### 4.1 Formularios
 - **Contacto:** Validación, reCAPTCHA, geolocalización, notificación por email, almacenamiento seguro.
 - **Pago:** Validación, integración con Fake Payment API, confirmación automática por email, almacenamiento seguro.
 
 ### 4.2 Panel de Administración
-- **Login seguro:**
-  - Local (email/contraseña, bcrypt)
-  - Google OAuth2 (botón "Iniciar con Google")
-- **Gestión de sesión:**
-  - express-session, cookies seguras (`httpOnly`, `sameSite`, `secure` en producción)
-  - Expiración automática por inactividad (15 minutos)
-  - Logout visual con icono
+- **Login seguro:** Local (email/contraseña, bcrypt) y Google OAuth2
+- **Gestión de sesión:** express-session, cookies seguras, expiración por inactividad (15 min)
 - **Cambio de contraseña**
 - **Vistas protegidas:** `/admin/dashboard`, `/admin/contacts`, `/admin/payments`
-- **Búsqueda en tablas:** JS en cliente (por nombre/email en contactos, por fecha/servicio/estado en pagos)
-- **Metadatos Open Graph y Twitter Card**
-- **Estadísticas y visualización de datos**
+- **Búsqueda en tablas** y filtros por fecha/servicio/estado
+- **Estadísticas** con gráficos Chart.js
 
 ### 4.3 Seguridad
 - Validación y sanitización de inputs
 - Prevención de SQL injection
-- Gestión segura de sesiones (NO se usa JWT)
+- Gestión segura de sesiones
 - Variables de entorno para credenciales
-
----
 
 ## 5. Rutas Principales
 
-- `/contact/add` (POST): Añadir contacto
+- `/` (GET): Página principal
+- `/contact` (GET): Formulario de contacto
+- `/contact/add` (POST): Enviar contacto
+- `/payment` (GET): Formulario de pago
 - `/payment/add` (POST): Procesar pago
-- `/admin/login` (GET/POST): Login admin (local y Google)
+- `/admin/login` (GET/POST): Login admin
 - `/admin/logout` (GET): Logout admin
 - `/admin/dashboard` (GET): Dashboard admin
-- `/admin/contacts` (GET): Ver contactos (admin)
-- `/admin/payments` (GET): Ver pagos (admin)
-- `/admin/change-password` (GET/POST): Cambio de contraseña admin
+- `/admin/contacts` (GET): Ver contactos
+- `/admin/payments` (GET): Ver pagos
+- `/admin/change-password` (GET/POST): Cambiar contraseña
 
----
-
-## 6. Créditos y Notas
+## 6. Créditos
 
 - Desarrollado por Carmine Bernabei
-- Para dudas o mejoras, contactar al autor
-
+- CoreStack, C.A. - Ingeniería Informática y Soluciones SaaS
+- San Juan de los Morros, Estado Guárico, Venezuela

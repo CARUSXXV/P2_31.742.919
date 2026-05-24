@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <% const ogTitle = 'Pago en línea - AquaRepair'; %>
-    <% const ogDescription = 'Realiza tu pago de servicios de plomería de forma rápida y segura con AquaRepair.'; %>
-    <% const ogImage = 'https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&w=800&q=80'; %>
-    <% const ogUrl = 'https://aquarepair.com/payment'; %>
+    <% const ogTitle = 'Pago en línea - CoreStack'; %>
+    <% const ogDescription = 'Realiza tu pago de servicios de ingeniería informática de forma rápida y segura con CoreStack.'; %>
+    <% const ogImage = 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80'; %>
+    <% const ogUrl = 'https://corestack.tech/payment'; %>
     <%- include('partials/head', { ogTitle, ogDescription, ogImage, ogUrl, name }) %>
     <link rel="stylesheet" href="/css/payment-form.css" />
   </head>
@@ -43,13 +43,13 @@
               id="service-select"
             >
               <% if (locale === 'es') { %>
-                <option value="1" data-amount="1500">Emergencias 24/7 - <%= formatCurrency(1500, 'es') %></option>
-                <option value="2" data-amount="1000">Reparaciones Precisas - <%= formatCurrency(1000, 'es') %></option>
-                <option value="3" data-amount="2000">Instalaciones Modernas - <%= formatCurrency(2000, 'es') %></option>
+                <option value="1" data-amount="5000">Desarrollo Web - <%= formatCurrency(5000, 'es') %></option>
+                <option value="2" data-amount="3000">Consultoría TI - <%= formatCurrency(3000, 'es') %></option>
+                <option value="3" data-amount="8000">SaaS & Cloud - <%= formatCurrency(8000, 'es') %></option>
               <% } else { %>
-                <option value="1" data-amount="150">24/7 Emergency - <%= formatCurrency(150, 'en') %></option>
-                <option value="2" data-amount="100">Precision Repairs - <%= formatCurrency(100, 'en') %></option>
-                <option value="3" data-amount="200">Modern Installations - <%= formatCurrency(200, 'en') %></option>
+                <option value="1" data-amount="500">Web Development - <%= formatCurrency(500, 'en') %></option>
+                <option value="2" data-amount="300">IT Consulting - <%= formatCurrency(300, 'en') %></option>
+                <option value="3" data-amount="800">SaaS & Cloud - <%= formatCurrency(800, 'en') %></option>
               <% } %>
             </select>
           </div>
@@ -135,7 +135,7 @@
               <option value="EUR">EUR</option>
             </select>
           </div>
-          <input type="hidden" name="amount" id="amount-input" value="150" />
+          <input type="hidden" name="amount" id="amount-input" value="500" />
           <button type="submit" class="form-button payment-button">
             <i class="ri-secure-payment-line"></i>
             <%= __("submit") || 'Realizar pago' %>

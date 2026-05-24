@@ -14,7 +14,7 @@ export function formatDate(date: Date, locale: string) {
 
 export function formatCurrency(amount: number, locale: string) {
   if (locale === 'es') {
-    return `VES ${amount.toLocaleString('es-VE', { minimumFractionDigits: 2 })} Bs`;
+    return `USD $${amount.toLocaleString('es-VE', { minimumFractionDigits: 2 })}`;
   } else {
     return `USD $${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
   }

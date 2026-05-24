@@ -141,11 +141,11 @@ const adminController = new AdminController();
 
 // Información relevante de la empresa
 const companyInfo = {
-  name: "AquaRepair",
-  slogan: "Soluciones de Plomería Profesional 24/7",
+  name: "CoreStack",
+  slogan: "Soluciones de Ingeniería Informática Profesional",
   phone: "+58 0412-0367234",
-  email: "info.aquarepair.ve@gmail.com",
-  address: "San Juan de Los Morros, Venezuela",
+  email: "contacto@corestack.tech",
+  address: "San Juan de Los Morros, Estado Guárico, Venezuela",
   socialMedia: {
     facebook: "#",
     instagram: "#",
@@ -153,161 +153,161 @@ const companyInfo = {
   },
   features: [
     {
-      title: "Respuesta Rápida",
-      description: "Atención inmediata en menos de 30 minutos",
-      icon: "timer-flash",
+      title: "Arquitectura Escalable",
+      description: "Sistemas diseñados para crecer con tu negocio sin límites",
+      icon: "stack",
     },
     {
-      title: "Servicio 24/7",
-      description: "Disponibles día y noche, incluso festivos",
-      icon: "24-hours",
+      title: "Soporte Dedicado",
+      description: "Atención personalizada y monitoreo continuo de tus sistemas",
+      icon: "headphone",
     },
     {
-      title: "Garantía Total",
-      description: "100% satisfacción garantizada en cada servicio",
+      title: "Seguridad Garantizada",
+      description: "Protección de datos con los más altos estándares de la industria",
       icon: "shield-check",
     },
     {
-      title: "Equipo Certificado",
-      description: "Profesionales altamente capacitados",
+      title: "Equipo Experto",
+      description: "Profesionales certificados en tecnologías de vanguardia",
       icon: "medal",
     },
   ],
   services: [
     {
-      title: "Emergencias 24/7",
+      title: "Desarrollo Web",
       description:
-        "Respuesta inmediata para emergencias de plomería a cualquier hora. Nuestro equipo está preparado para atender cualquier urgencia.",
-      icon: "alert-circle",
+        "Plataformas web dinámicas y modernas construidas con tecnologías de punta. Soluciones SaaS escalables y eficientes.",
+      icon: "code-box",
       image:
-        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       details: [
-        "Fugas de agua",
-        "Tuberías rotas",
-        "Inundaciones",
-        "Problemas de drenaje",
+        "Aplicaciones web progresivas",
+        "Plataformas SaaS en la nube",
+        "Sistemas de gestión empresarial",
+        "Paneles de control analíticos",
       ],
     },
     {
-      title: "Reparaciones Precisas",
+      title: "Consultoría TI",
       description:
-        "Diagnóstico experto y reparaciones duraderas con las mejores herramientas y técnicas del mercado.",
-      icon: "tool",
+        "Asesoría tecnológica integral para optimizar procesos y digitalizar tu empresa con las mejores prácticas del mercado.",
+      icon: "service",
       image:
-        "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       details: [
-        "Reparación de grifos",
-        "Arreglo de inodoros",
-        "Reparación de tuberías",
-        "Mantenimiento preventivo",
+        "Transformación digital",
+        "Arquitectura de software",
+        "Optimización de infraestructura",
+        "Seguridad informática",
       ],
     },
     {
-      title: "Instalaciones Modernas",
+      title: "SaaS & Cloud",
       description:
-        "Instalación profesional con tecnología de vanguardia para asegurar la máxima eficiencia y durabilidad.",
-      icon: "settings",
+        "Soluciones en la nube para centralizar operaciones, inventarios y gestión de datos en tiempo real desde cualquier lugar.",
+      icon: "cloud",
       image:
-        "https://images.unsplash.com/photo-1504148455328-c376907d081c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       details: [
-        "Sistemas de agua",
-        "Calentadores",
-        "Bombas de agua",
-        "Sistemas de filtración",
+        "Migración a la nube",
+        "Gestión de bases de datos",
+        "Automatización de procesos",
+        "Infraestructura como servicio",
       ],
     },
   ],
   projects: [
     {
-      title: "Renovación Completa",
+      title: "Plataforma E-commerce",
       description:
-        "Renovación total del sistema de plomería en edificio residencial",
+        "Sistema de comercio electrónico completo con panel admin y pasarela de pagos integrada",
       image:
-        "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Residencial",
-    },
-    {
-      title: "Instalación Comercial",
-      description: "Sistema de plomería para nuevo centro comercial",
-      image:
-        "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       category: "Comercial",
     },
     {
-      title: "Mantenimiento Industrial",
-      description: "Mantenimiento preventivo en planta industrial",
+      title: "Dashboard Analítico",
+      description: "Plataforma de inteligencia de negocios con visualización de datos en tiempo real",
       image:
-        "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Industrial",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Empresarial",
+    },
+    {
+      title: "App Móvil Corporativa",
+      description: "Aplicación móvil multiplataforma para gestión de inventarios y operaciones",
+      image:
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Corporativo",
     },
   ],
   testimonials: [
     {
-      text: "Servicio excepcional. Llegaron en minutos cuando tuve una emergencia de plomería. El técnico fue muy profesional y resolvió el problema rápidamente.",
-      author: "Carlos Méndez",
+      text: "CoreStack transformó nuestra gestión empresarial con su plataforma SaaS. Ahora tenemos control total de inventarios y procesos en tiempo real.",
+      author: "María López",
+      rating: 5,
+      image:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    },
+    {
+      text: "El equipo de CoreStack desarrolló un dashboard analítico que revolucionó nuestra toma de decisiones. Totalmente recomendados.",
+      author: "Pedro Castillo",
       rating: 5,
       image:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
     },
     {
-      text: "Profesionales, puntuales y precios justos. Totalmente recomendados. Han realizado varios trabajos en mi casa y siempre con excelentes resultados.",
-      author: "Ana García",
+      text: "Buscábamos una solución tecnológica adaptada a Venezuela y CoreStack nos ofreció exactamente eso. Profesionales, innovadores y confiables.",
+      author: "Ana Mendoza",
       rating: 5,
       image:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
     },
-    {
-      text: "La mejor empresa de plomería que he contratado. Trabajo impecable y personal muy capacitado. Resolvieron un problema complejo que otras empresas no pudieron.",
-      author: "Roberto Sánchez",
-      rating: 5,
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-    },
   ],
   certifications: [
-    "Certificación Master Plumber",
-    "ISO 9001:2015",
-    "Asociación Nacional de Plomería",
-    "Green Plumbing Certified",
+    "Registro SAREN",
+    "Código de Comercio Venezolano",
+    "Capital Social Bs. 100.000,00",
+    "Junta Directiva Técnica",
   ],
   faqs: [
     {
-      question: "¿Cuánto tiempo tardan en llegar?",
+      question: "¿Qué servicios de desarrollo ofrecen?",
       answer:
-        "Nuestro tiempo de respuesta promedio es de 30 minutos en casos de emergencia.",
+        "Ofrecemos desarrollo web, consultoría TI, aplicaciones SaaS en la nube y soluciones de software empresarial a medida.",
     },
     {
-      question: "¿Ofrecen garantía por el servicio?",
+      question: "¿Cuánto tiempo toma desarrollar un proyecto?",
       answer:
-        "Sí, todos nuestros trabajos tienen garantía de 6 meses a 1 año, dependiendo del tipo de servicio.",
+        "Dependiendo de la complejidad, nuestros proyectos pueden tomar desde 2 semanas hasta varios meses. Trabajamos por sprints para garantizar resultados continuos.",
     },
     {
-      question: "¿Trabajan los fines de semana?",
+      question: "¿Ofrecen soporte post-lanzamiento?",
       answer:
-        "Sí, ofrecemos servicio 24/7, incluyendo fines de semana y días festivos.",
+        "Sí, todos nuestros desarrollos incluyen soporte técnico y mantenimiento por un período mínimo de 6 meses.",
     },
     {
-      question: "¿Cuáles son sus formas de pago?",
+      question: "¿Trabajan con PYMES venezolanas?",
       answer:
-        "Aceptamos efectivo, tarjetas de crédito/débito, transferencias bancarias y pagos móviles.",
+        "Sí, estamos especializados en soluciones para PYMES venezolanas, adaptando nuestra tecnología a las necesidades y presupuestos locales.",
     },
   ],
   stats: [
     {
-      number: "15+",
-      label: "Años de Experiencia",
+      number: "5",
+      label: "Fundadores",
     },
     {
-      number: "10000+",
-      label: "Clientes Satisfechos",
+      number: "50+",
+      label: "Proyectos Entregados",
+    },
+    {
+      number: "100%",
+      label: "Compromiso",
     },
     {
       number: "24/7",
-      label: "Servicio Disponible",
-    },
-    {
-      number: "30min",
-      label: "Tiempo de Respuesta",
+      label: "Soporte Técnico",
     },
   ],
 };

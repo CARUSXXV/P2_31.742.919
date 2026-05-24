@@ -29,7 +29,7 @@ export class EmailService {
       // Define las opciones del correo electrónico
       from: process.env.SMTP_USER, // Remitente del correo
       to: recipients, // Destinatarios del correo
-      subject: 'Nuevo Contacto - AquaRepair', // Asunto del correo
+      subject: 'Nuevo Contacto - CoreStack', // Asunto del correo
       html: `
         <h2>Nuevo Mensaje de Contacto</h2>
         <p><strong>Nombre:</strong> ${name}</p>
@@ -55,13 +55,13 @@ export class EmailService {
     const mailOptions = {
       from: process.env.SMTP_USER,
       to: payment.email,
-      subject: '¡Gracias por tu pago en AquaRepair!',
+      subject: '¡Gracias por tu pago en CoreStack!',
       html: `<h2>¡Pago recibido con éxito!</h2>
              <p>Hola <b>${payment.cardholder_name}</b>,</p>
              <p>Hemos recibido tu pago por el servicio solicitado. Pronto nos pondremos en contacto contigo.</p>
              <p><b>Monto:</b> ${payment.amount} ${payment.currency}</p>
              <p><b>Referencia:</b> ${payment.transaction_id || 'N/A'}</p>
-             <br><p>¡Gracias por confiar en AquaRepair!</p>`
+             <br><p>¡Gracias por confiar en CoreStack!</p>`
     };
     await this.transporter.sendMail(mailOptions); // Envía el correo electrónico de confirmación de pago
   }

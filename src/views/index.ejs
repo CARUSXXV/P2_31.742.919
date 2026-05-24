@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <% const ogTitle = 'AquaRepair - Soluciones de Plomería Profesional 24/7'; %>
-    <% const ogDescription = 'Expertos en plomería, atención inmediata, servicios de emergencia y garantía total. ¡Contáctanos para resolver cualquier problema de agua!'; %>
-    <% const ogImage = 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80'; %>
-    <% const ogUrl = 'https://aquarepair.com'; %>
+    <% const ogTitle = 'CoreStack - Ingeniería Informática y Soluciones SaaS'; %>
+    <% const ogDescription = 'Expertos en ingeniería informática, desarrollo de software, consultoría TI y soluciones SaaS. Transformamos tu empresa con tecnología de vanguardia.'; %>
+    <% const ogImage = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80'; %>
+    <% const ogUrl = 'https://corestack.tech'; %>
     <%- include('partials/head', { ogTitle, ogDescription, ogImage, ogUrl, name }) %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= name %> - Servicio de Plomería Profesional</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/droplet.svg">
+    <title><%= name %> - Ingeniería Informática Profesional</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/layers.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
     <nav class="navbar">
       <div class="container navbar-container">
         <a href="#" class="logo">
-          <i class="ri-drop-line"></i>
+          <i class="ri-stack-line"></i>
           <%= name %>
         </a>
         <!-- Selector de idioma -->
@@ -45,9 +45,9 @@
           <a href="#preguntas"><%= __("FAQ") %></a>
           <a href="#contacto"><%= __("Contacto") %></a>
         </div>
-        <a href="tel:+584120367234" class="cta-button emergency-contact">
+        <a href="/contact" class="cta-button emergency-contact">
           <i class="ri-phone-line"></i>
-          <%= __("Emergencias 24/7") %>
+          <%= __("Soporte 24/7") %>
         </a>
       </div>
     </nav>
@@ -90,15 +90,14 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero">
       <video class="hero-video" autoplay loop muted playsinline>
-        <source src="/videos/mujer-fontanero.webm" type="video/webm" />
-        <source src="/videos/mujer-fontanero.mp4" type="video/mp4" />
+        <source src="/videos/coding-tech.mp4" type="video/mp4" />
         Tu navegador no soporta la reproducción de videos.
       </video>
       <div class="hero-overlay"></div>
       <div class="container hero-content">
-        <h1><%= __("Soluciones de Plomería Profesional") %></h1>
+        <h1><%= __("Soluciones de Ingeniería Informática Profesional") %></h1>
         <p>
-          <%= __("Expertos disponibles 24/7 para resolver cualquier emergencia con la máxima calidad y eficiencia") %>
+          <%= __("Expertos en tecnología 24/7 para impulsar la transformación digital de tu empresa con innovación y calidad") %>
         </p>
         <a href="/contact" class="cta-button">
           <i class="ri-customer-service-line"></i>
@@ -259,8 +258,8 @@
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="container" data-aos="fade-up">
-        <h2><%= __("¿Necesitas ayuda urgente?") %></h2>
-        <p><%= __("Estamos disponibles 24/7 para atender tu emergencia") %></p>
+        <h2><%= __("¿Necesitas una solución tecnológica?") %></h2>
+        <p><%= __("Estamos disponibles para impulsar la transformación digital de tu empresa") %></p>
         <a href="/contact"  class="cta-button cta-button-call">
           <i class="ri-phone-line"></i>
           <%= __("¡Contáctanos ahora!") %>
