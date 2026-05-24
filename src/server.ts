@@ -143,7 +143,7 @@ const adminController = new AdminController();
 const companyInfo = {
   name: "CoreStack",
   slogan: "Soluciones de Ingeniería Informática Profesional",
-  phone: "+58 0412-0367234",
+  phone: "",
   email: "contacto@corestack.tech",
   address: "San Juan de Los Morros, Estado Guárico, Venezuela",
   socialMedia: {
