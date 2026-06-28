@@ -115,27 +115,17 @@
     padding: 0.5rem 1rem;
     border-radius: 50px;
     position: relative;
-  }
-
-  .nav-links a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-  }
-
-  .nav-links a:hover::after {
-    width: 80%;
+    background-color: transparent;
+    background-image: linear-gradient(to top, var(--primary-color), var(--primary-color));
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 0 2px;
   }
 
   .nav-links a:hover {
     color: var(--primary-color);
-    background: rgba(0, 102, 204, 0.1);
+    background-color: rgba(0, 102, 204, 0.1);
+    background-size: 80% 2px;
   }
 
   .cta-button {
